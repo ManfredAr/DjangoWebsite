@@ -3,4 +3,4 @@ from django.http import HttpResponse
 
 # Create your views here.
 def home(response):
-    return HttpResponse("Site launched");
+    return render(response, "home/home.html", {})
