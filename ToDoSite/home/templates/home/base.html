@@ -8,8 +8,12 @@
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+        {% block style %}
         <link rel="stylesheet" type="text/css" media="screen" href="{%static 'css/home.css'%}">
+        {% endblock %}
     </head>
+
+
     {% block main %}
     <body id="bg" style="background-image: url('{%static 'image/background.jpg'%}');">
     {% endblock %}
@@ -29,6 +33,17 @@
               </ul>
             </div>
           </nav>
-          {% block content %} {% endblock %}
-    </body>
+
+      {% block message %}
+          {% if messages %}
+            {% for message in messages %}
+            <div style="text-align: center;">
+              <strong>{{message}}</strong>
+            </div>
+            {% endfor %}
+          {% endif %}
+      {% endblock %}
+
+
+      {% block content %} {% endblock %}
 </html>

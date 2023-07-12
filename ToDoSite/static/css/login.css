@@ -1,0 +1,22 @@
+.container {
+    margin: auto;
+    width: 30%;
+    padding: 10px;
+    border-radius:10px;
+    top: 50%;
+    transform: translateY(60%);
+
+}
+
+.content {
+    text-align: center;
+}
+
+.rounded-input {
+    padding:5px;
+    border-radius:5px;
+}
+
+body {
+    background-image: linear-gradient(to right, rgb(185, 83, 206) , rgb(126, 255, 87));
+}
