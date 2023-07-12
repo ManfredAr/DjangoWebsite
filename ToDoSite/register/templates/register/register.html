@@ -1,11 +1,10 @@
 {% extends "home/base.html" %}
-{%load static%}
+{% load static %}
 
 {% block main %}
-
 <body>
-</body>
 
+</body>
 {% endblock %}
 
 {% block style %}
@@ -13,19 +12,22 @@
 {% endblock %}
 
 {% block content %}  
-
 {% if form.errors %}
 <p>There was an error with your form.</p>
+{% else %}
+<p></p>
 {% endif %}
 
-<form action="" method="POST">  
-  {% csrf_token %}
-    <div class="container">
-      <div class="content">   
-        {{ form.as_p }}  <br><br> 
-        <button type="submit">Register</button>  
-      </div>   
-    </div>   
-</form>  
-
+<div class="container">
+  <div class="shadow-lg p-3 mb-5 bg-white rounded" id="box" style="max-width: 60%;">
+    <h2 style="left: 0;"> Register</h2>
+    <form action="" method="POST">
+      {% csrf_token %}
+      <div class="form-group">
+        {{ form.as_p }}
+      </div>
+      <button type="submit" class="btn btn-success">Register</button> <br>
+    </form>
+  </div>
+</div>
 {% endblock %}
