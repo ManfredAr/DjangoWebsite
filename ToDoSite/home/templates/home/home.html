@@ -12,4 +12,10 @@
 
 <h1 class="home">Welcome back</h1>
 
+{% if user.is_authenticated %}
+    <p>Logged in</p>
+{% else %}
+    <p>Not logged in</p>
+{% endif %}
+
 {% endblock %}
