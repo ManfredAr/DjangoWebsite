@@ -1,0 +1,28 @@
+{% extends 'home/base.html' %}
+{%load static%}
+{% block title %} Create post {% endblock %}
+
+{% block style %}
+<link rel="stylesheet" type="text/css" media="screen" href="{%static 'css/post.css'%}">
+{% endblock %}
+
+{% block main %}
+    <body>
+{% endblock %}
+
+{% block content %}
+{% if user.is_authenticated %}
+<div class="container">
+    <h1 style="text-align: center;"> Create a post </h1>
+    <form method="POST">
+        {% csrf_token %}
+        <textarea class="form-control" name="content" maxlength="300" rows="4" cols="7"></textarea> <br> <br>
+        <div style="text-align: center;">
+            <button type="submit"> Post </button>
+        </div>
+    </form>
+</div>
+{% else %}
+    <h1> Please login to create a post </h1>
+{% endif %}
+{% endblock %}

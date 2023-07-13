@@ -24,23 +24,26 @@
             <a class="navbar-brand" href="#">Manfreds website</a>
             <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
               <div class="navbar-nav">
-                <a class="nav-link active" aria-current="page" href="#">Home</a>
-                <a class="nav-link" href="#">Post</a>
-                <a class="nav-link" href="#">Feed</a>
-                <a class="nav-link" href="#">Profile</a>
-                <a class="nav-link" href="#">Explore</a>
+                <a class="nav-link" aria-current="page" id="home" href="/home/">Home</a>
+                <a class="nav-link" id="post" href="/post/">Post</a>
+                <a class="nav-link" id="Feed" href="#">Feed</a>
+                <a class="nav-link" id="pro" href="#">Profile</a>
+                <a class="nav-link" id="exp" href="#">Explore</a>
               </div>
             </div>
             <div class="navbar-nav ml-auto">
-              <a class="nav-link" href="/logout">Logout</a>
+              <a class="nav-link" href="/logout/">Logout</a>
             </div>
         </nav>
 
       {% block message %}
           {% if messages %}
             {% for message in messages %}
-            <div style="text-align: center;">
+            <div class="alert alert-warning alert-dismissible fade show" role="alert">
               <strong>{{message}}</strong>
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
             </div>
             {% endfor %}
           {% endif %}
