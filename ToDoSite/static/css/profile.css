@@ -1,0 +1,19 @@
+.header {
+    padding: 60px;
+    text-align: center;
+    background: #1abc9c;
+    color: white;
+    font-size: 30px;
+  }
+
+  .container {
+    border-top-style: none;
+    border-right-style: solid;
+    border-bottom-style: none;
+    border-left-style: solid;
+  }
+
+  .lines {
+    border-top-style: solid;
+    border-width: thin;
+  }

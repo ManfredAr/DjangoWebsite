@@ -1,1 +1,32 @@
-{% extends 'home/base.html' %}
+{% extends "home/base.html" %}
+{%load static%}
+
+{% block main %}
+
+<body>
+</body>
+
+{% endblock %}
+
+{% block style %}
+<link rel="stylesheet" type="text/css" media="screen" href="{%static 'css/profile.css'%}">
+{% endblock %}
+
+{% block content %}
+<div class="header">
+    <h1>{{user.username}}</h1>
+</div>
+
+<div class="container">
+    <h2>Posts Made</h2>
+    {% for post in posts %}
+        <div class="lines"> 
+            <div>
+                <a href="/profile">{{ user.username }}</a> | {{ post.time|timesince }}<br>
+                {{ post.text }}
+            </div>
+        </div>
+    {% endfor %}
+</div>
+
+{% endblock %}
