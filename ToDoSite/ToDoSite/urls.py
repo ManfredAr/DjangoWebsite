@@ -18,6 +18,7 @@ from django.contrib import admin
 from django.urls import path, include
 from register.views import login_user, register_user, logout_user
 from post.views import user_post
+from account.views import profile
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -26,4 +27,5 @@ urlpatterns = [
     path('register/', register_user),
     path('logout/', logout_user),
     path('post/', user_post),
+    path('profile/', profile),
 ]
