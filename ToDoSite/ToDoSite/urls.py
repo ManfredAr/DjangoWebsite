@@ -19,7 +19,6 @@ from django.urls import path, include
 from register.views import login_user, register_user, logout_user
 from post.views import user_post
 from account.views import profile
-from explore.views import explore
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -29,5 +28,5 @@ urlpatterns = [
     path('logout/', logout_user),
     path('post/', user_post),
     path('profile/', profile),
-    path('explore/', explore),
+    path('explore/', include("explore.urls")),
 ]
