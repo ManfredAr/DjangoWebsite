@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'register.apps.RegisterConfig',
     'post.apps.PostConfig',
     'account.apps.AccountConfig',
+    'explore.apps.ExploreConfig',
 ]
 
 MIDDLEWARE = [
