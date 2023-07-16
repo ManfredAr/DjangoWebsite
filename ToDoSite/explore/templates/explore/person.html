@@ -19,6 +19,8 @@
 <div class="container">
     <div class="header">
         <h1>{{profile.username}}</h1>
+        <a href="/explore/{{profile.username}}/followers">{{ followers.count }} followers </a> <br/>
+        <a href="/explore/{{profile.username}}/following">follows {{ following.count }}</a>
         <form method="POST">
             {% csrf_token %}
             {% if user.username == profile.username %}

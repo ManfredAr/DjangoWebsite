@@ -12,7 +12,10 @@ def explore(request):
 def person(request, username):
     user_details = User.objects.get(username=username)
     Posts = post.objects.filter(user=user_details).order_by('-time')
+    followers = follower.objects.filter(followee=user_details)
+    following = follower.objects.filter(follower=user_details)
     
+
     if (request.method == "POST"):
         choice = request.POST["choice"]
         if (choice == "follow"):
@@ -23,4 +26,14 @@ def person(request, username):
                 follower_entry.delete()
 
     is_following = follower.objects.filter(follower=request.user, followee=user_details).exists()
-    return render(request, 'explore/person.html', {"profile": user_details, "posts": Posts, "follow": is_following})
+    return render(request, 'explore/person.html', {"profile": user_details, "posts": Posts, "follow": is_following, "followers":followers, "following":following})
+
+def followers(request, username):
+    profile = User.objects.get(username=username)
+    followers = follower.objects.filter(followee=profile)
+    return render(request, 'explore/followers.html', {"profile":profile, "followers":followers})
+
+def following(request, username):
+    profile = User.objects.get(username=username)
+    following = follower.objects.filter(follower=profile)
+    return render(request, 'explore/following.html', {"profile":profile, "following":following})
