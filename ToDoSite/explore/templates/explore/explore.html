@@ -1,0 +1,34 @@
+{% extends "home/base.html" %}
+{%load static%}
+
+{% block title %}
+<title>My profile</title>
+{% endblock %}
+
+{% block main %}
+
+<body class="bg">
+
+{% endblock %}
+
+{% block style %}
+<link rel="stylesheet" type="text/css" media="screen" href="{%static 'css/explore.css'%}">
+<script src="{% static 'js/explore.js' %}"
+        defer
+        data-username="{{ username }}"></script>
+{% endblock %}
+
+{% block content %}
+<div class="box">
+    <div class="container">
+        <form id="form" role="search" style="margin-top: 10px;">
+            <div class="searchbox">
+                <input type="search" id="query"  placeholder="Search..." aria-label="Search through site content">
+            </div>
+            <div class="button">
+                <button>Search</button>
+            </div>
+          </form>
+    </div>
+</div>
+{% endblock %}

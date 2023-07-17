@@ -28,4 +28,5 @@ urlpatterns = [
     path('logout/', logout_user),
     path('post/', user_post),
     path('profile/', profile),
+    path('explore/', include("explore.urls")),
 ]

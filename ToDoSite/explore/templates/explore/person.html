@@ -1,0 +1,53 @@
+{% extends "home/base.html" %}
+{%load static%}
+
+{% block title %}
+{{ profile.username }}
+{% endblock %}
+
+{% block main %}
+
+<body class="bg">
+
+{% endblock %}
+
+{% block style %}
+<link rel="stylesheet" type="text/css" media="screen" href="{%static 'css/person.css'%}">
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="header">
+        <h1>{{profile.username}}</h1>
+        <a href="/explore/{{profile.username}}/followers">{{ followers.count }} followers </a> <br/>
+        <a href="/explore/{{profile.username}}/following">follows {{ following.count }}</a>
+        <form method="POST">
+            {% csrf_token %}
+            {% if user.username == profile.username %}
+
+            {% elif follow == True  %} 
+                <button type="submit" name="choice" value="Unfollow"> Unfollow </button>
+            {% else %}
+                <button type="submit" name="choice" value="follow"> Follow </button>
+            {% endif %}
+        </form>
+    </div>
+    <div class="posts">
+        <h2>Posts Made</h2>
+        {% for post in posts %}
+            <div class="lines"> 
+                <div class="name">
+                    <a href="#">{{ profile.username }}</a>
+                </div> 
+                <div class="time">
+                    posted: {{ post.time|timesince }}
+                </div> <br>
+                <div class="con">
+                    {{ post.text }}
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,34 @@
+{% extends "home/base.html" %}
+{%load static%}
+
+{% block title %}
+{{ profile.username }}
+{% endblock %}
+
+{% block main %}
+
+<body class="bg">
+
+{% endblock %}
+
+{% block style %}
+<link rel="stylesheet" type="text/css" media="screen" href="{%static 'css/follower.css'%}">
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="header">
+        <h1>{{profile.username}}</h1>
+        <a>{{ followers.count }} followers </a> <br/>
+    </div>
+    <div class="follow">
+        {% for i in followers %}
+            <div class="person">
+                <a href="/explore/{{i.follower.username}}"> {{ i.follower.username }} </a>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+
+{% endblock %}
+
