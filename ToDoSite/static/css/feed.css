@@ -49,3 +49,7 @@ html, body {
 .time {
     float: right;
 }
+
+.likes {
+    color: white;
+}

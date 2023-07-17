@@ -23,13 +23,24 @@ Your feed
     {% for post in posts %}
     <div class="lines"> 
         <div class="name">
-            <a href="/profile">{{ post.user.username }}</a>
+            <a href="/explore/{{post.user.username}}">{{ post.user.username }}</a>
         </div> 
         <div class="time">
             posted: {{ post.time|timesince }}
         </div> <br>
         <div class="con">
             <p> {{ post.text }} </p>
+        </div>
+        <div class="likes">
+            <form action="/post/input-likes", method="POST">
+                {% csrf_token %}
+                <input type="hidden" name="post_id" value="{{ post.id }}"> <p> {{post.likes}} likes </p>
+            {% if post.user_like %}
+                <button type="submit" name="is-liked" value="unlike"> Dislike </button>
+            {% else %}
+                <button type="submit" name="is-liked" value="like"> Like </button> 
+            {% endif %}
+            </form> 
         </div>
     </div>
     {% endfor %}
