@@ -13,6 +13,7 @@ Your feed
 
 {% block style %}
 <link rel="stylesheet" type="text/css" media="screen" href="{%static 'css/feed.css'%}">
+<script src="{% static 'js/feed.js' %}"></script>
 {% endblock %}
 
 {% block content %}
@@ -32,14 +33,14 @@ Your feed
             <p> {{ post.text }} </p>
         </div>
         <div class="likes">
-            <form action="/post/input-likes", method="POST">
-                {% csrf_token %}
-                <input type="hidden" name="post_id" value="{{ post.id }}"> <p> {{post.likes}} likes </p>
+            <form method="POST" id="{{post.id}}" class="like-form" data-form-id="{{post.id}}">
+            {% csrf_token %}
             {% if post.user_like %}
-                <button type="submit" name="is-liked" value="unlike"> Dislike </button>
+                <button style="color: red;" type="submit" name="is-liked" id="{{post.id}}like"> Like </button> 
             {% else %}
-                <button type="submit" name="is-liked" value="like"> Like </button> 
+                <button style="color: black;" type="submit" name="is-liked" id="{{post.id}}like"> Like </button> 
             {% endif %}
+                <p id="like-count-{{post.id}}"> {{post.likes}} </p>
             </form> 
         </div>
     </div>
