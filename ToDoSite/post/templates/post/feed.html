@@ -1,0 +1,50 @@
+{% extends "home/base.html" %}
+{%load static%}
+
+{% block title %}
+Your feed
+{% endblock %}
+
+{% block main %}
+
+<body class="bg">
+
+{% endblock %}
+
+{% block style %}
+<link rel="stylesheet" type="text/css" media="screen" href="{%static 'css/feed.css'%}">
+<script src="{% static 'js/feed.js' %}"></script>
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div style="background-color: aqua;">
+        <h1 style="color: azure;">Your Feed</h1>
+    </div>
+    {% for post in posts %}
+    <div class="lines"> 
+        <div class="name">
+            <a href="/explore/{{post.user.username}}">{{ post.user.username }}</a>
+        </div> 
+        <div class="time">
+            posted: {{ post.time|timesince }}
+        </div> <br>
+        <div class="con">
+            <p> {{ post.text }} </p>
+        </div>
+        <div class="likes">
+            <form method="POST" id="{{post.id}}" class="like-form" data-form-id="{{post.id}}">
+            {% csrf_token %}
+            {% if post.user_like %}
+                <button style="color: red;" type="submit" name="is-liked" id="{{post.id}}like"> Like </button> 
+            {% else %}
+                <button style="color: black;" type="submit" name="is-liked" id="{{post.id}}like"> Like </button> 
+            {% endif %}
+                <p id="like-count-{{post.id}}"> {{post.likes}} </p>
+            </form> 
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+{% endblock %}
