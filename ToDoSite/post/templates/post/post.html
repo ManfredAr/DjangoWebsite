@@ -12,8 +12,8 @@
 
 {% block content %}
 {% if user.is_authenticated %}
-<div class="container">
-    <h1 style="text-align: center;"> Create a post </h1>
+<div class="main">
+    <h1 style="color: white;"> Create a post </h1> <br/>
     <form method="POST">
         {% csrf_token %}
         <textarea class="form-control" name="content" maxlength="300" rows="4" cols="7"></textarea> <br> <br>
