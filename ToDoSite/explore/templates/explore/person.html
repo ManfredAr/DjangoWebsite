@@ -13,39 +13,73 @@
 
 {% block style %}
 <link rel="stylesheet" type="text/css" media="screen" href="{%static 'css/person.css'%}">
+<script src="{% static 'js/feed.js' %}"></script>
 {% endblock %}
 
 {% block content %}
-<div class="container">
+<div class="main">
     <div class="header">
-        <h1>{{profile.username}}</h1>
-        <a href="/explore/{{profile.username}}/followers">{{ followers.count }} followers </a> <br/>
-        <a href="/explore/{{profile.username}}/following">follows {{ following.count }}</a>
-        <form method="POST">
-            {% csrf_token %}
-            {% if user.username == profile.username %}
-
-            {% elif follow == True  %} 
-                <button type="submit" name="choice" value="Unfollow"> Unfollow </button>
-            {% else %}
-                <button type="submit" name="choice" value="follow"> Follow </button>
-            {% endif %}
-        </form>
-    </div>
-    <div class="posts">
-        <h2>Posts Made</h2>
-        {% for post in posts %}
-            <div class="lines"> 
-                <div class="name">
-                    <a href="#">{{ profile.username }}</a>
-                </div> 
-                <div class="time">
-                    posted: {{ post.time|timesince }}
-                </div> <br>
-                <div class="con">
-                    {{ post.text }}
-                </div>
+        <div class="top">
+            <div class="heading">
+                <h1>{{profile.username}}</h1>
             </div>
+            <form method="POST">
+                <div class="follow">
+                    {% csrf_token %}
+                    {% if user.username == profile.username %}
+
+                    {% elif follow == True  %} 
+                        <button type="submit" name="choice" value="Unfollow"> Unfollow </button>
+                    {% else %}
+                        <button type="submit" name="choice" value="follow"> Follow </button>
+                    {% endif %}
+                </div>
+            </form>
+        </div>
+        <br/>
+        <div class="info">
+            <div class="followers">
+                <a href="/explore/{{profile.username}}/followers"> <strong>{{ followers.count }}</strong> <div class="light">followers</div></a>
+            </div>
+            <div class="separator"></div>
+            <div class="following">
+                <a href="/explore/{{profile.username}}/following"> <strong>{{ following.count }}</strong> <div class="light">following</div></a>
+            </div>
+        </div>
+    </div>
+    <div class="content">
+        <div>
+            <h1 style="color: rgb(255, 255, 255);">Your Feed</h1>
+        </div>
+        {% for post in posts %}
+        <div class="box"> 
+            <div class="name">
+                <a href="/explore/{{post.user.username}}">{{ post.user.username }}</a>
+            </div> 
+            <div class="time">
+                posted: {{ post.time|timesince }}
+            </div> <br>
+            <div class="con">
+                <p> {{ post.text }} </p>
+            </div>
+            <div class="likes">
+                <form method="POST" id="{{post.id}}" class="like-form" data-form-id="{{post.id}}">
+                    {% csrf_token %}
+                    <div class="press">
+                        {% if post.user_like %}
+                            <button style="color: red;" type="submit" name="is-liked" id="{{post.id}}like"> 
+                                <i class="fa fa-heart"></i>
+                            </button> 
+                        {% else %}
+                            <button style="color: rgb(255, 255, 255);" type="submit" name="is-liked" id="{{post.id}}like">  
+                                <i class="fa fa-heart"></i>
+                            </button> 
+                        {% endif %}
+                        <p id="like-count-{{post.id}}"> {{post.likes}} </p>
+                    </div>
+                </form> 
+            </div>
+        </div>
         {% endfor %}
     </div>
 </div>
