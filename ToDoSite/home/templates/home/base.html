@@ -1,60 +1,40 @@
 <!DOCTYPE html>
-{%load static%}
-</html>
+{% load static %}
+<html>
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-<!doctype html>
-<html lang="en">
-  <head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <link rel="stylesheet" type="text/css" media="screen" href="{% static 'css/home.css' %}">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  {% block style %} {% endblock %}
 
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    {% block style %}
-    <link rel="stylesheet" type="text/css" media="screen" href="{%static 'css/home.css'%}">
-    {% endblock %}
-    <title>{% block title %}HomePage{% endblock %}</title>
-  </head>
-    {% block main %}
-    <body id="bg" style="background-image: url('{%static 'image/background.jpg'%}');">
-    {% endblock %}
-        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-          <div class="container-fluid">
-            <a class="navbar-brand" href="#">Manfreds website</a>
-            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-              <div class="navbar-nav">
-                <a class="nav-link" aria-current="page" id="home" href="/home/">Home</a>
-                <a class="nav-link" id="post" href="/post/post">Post</a>
-                <a class="nav-link" id="Feed" href="/post/feed">Feed</a>
-                <a class="nav-link" id="pro" href="/profile/">Profile</a>
-                <a class="nav-link" id="exp" href="/explore">Explore</a>
-              </div>
-            </div>
-            <div class="navbar-nav ml-auto">
-              <a class="nav-link" href="/logout/">Logout</a>
-            </div>
-        </nav>
+  <title>{% block title %}HomePage{% endblock %}</title>
 
-      {% block message %}
-          {% if messages %}
-            {% for message in messages %}
-            <div class="alert alert-warning alert-dismissible fade show" role="alert">
-              <strong>{{message}}</strong>
-              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            {% endfor %}
-          {% endif %}
-      {% endblock %}
+</head>
 
+<body class="bg">
 
-      {% block content %} {% endblock %}
-    <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-  </body>
+  <!-- Main Content -->
+  <div class="container">
+    <div class="sidebar">
+      <!-- Add your navigation links here -->
+        <a href="/post/feed">Feed</a> <br/>
+        <a href="/post/post">Post</a> <br/>
+        <a href="/profile">My Profile</a> <br/>
+        <a href="/explore">Explore</a> <br/>
+        <a href="/logout">Logout</a> <br/>
+        <!-- Add more links as needed -->
+    </div>
+    {% block content %} {% endblock %}
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  
+</body>
 </html>
