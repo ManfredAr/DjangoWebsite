@@ -1,27 +1,43 @@
-body, html {
+html, body {
     height: 100%;
     margin: 0;
-}
-
-#bg {
-    height: 100%;
-      
-    /* Center and scale the image nicely */
-    background-position: center;
+    background-image: linear-gradient(rgba(136, 1, 138, 0.768), rgb(0, 28, 152));
     background-repeat: no-repeat;
-    background-size: cover;
+    background-attachment: fixed; /* Keep the background fixed while scrolling */
+    min-height: 100vh; /* Set the minimum height of the body to 100% of the viewport height */
 }
 
-h1 {
-    height: 50%;
-    justify-content: center;
-    font-size: 140px;
-    align-items: center;
-    font-family: initial;
-    color: burlywood;
+.container {
+    width: 30%;
+    background-color: #000000;
     display: flex;
+    justify-content: center;
+    min-height: 100%;
 }
 
-#home{
-    color: azure;
+.sidebar {
+    width: 20vh;
+    position: fixed;
+    left: 23%;
+    top: 5%;
+}
+
+.sidebar a {
+    color: #ffffff;
+    padding: 17px 40px;
+    border-radius: 50px;
+    border: 0;
+    box-shadow: rgb(0 0 0 / 5%) 0 0 8px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    font-size: 15px;
+    transition: all .5s ease;
+    display: block;
+}
+   
+.sidebar a:hover {
+    background-color: hsl(261deg 80% 48%);
+    color: hsl(0, 0%, 100%);
+    box-shadow: rgb(93 24 220) 0px 7px 29px 0px;
+    text-decoration: none;
 }

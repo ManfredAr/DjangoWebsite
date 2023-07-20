@@ -1,25 +1,10 @@
-html, body {
-    height: 100%;
-    margin: 0;
-  }
-
-.bg {
-    background-image: linear-gradient(rgba(136, 1, 138, 0.768), rgb(0, 28, 152));
-    background-repeat: no-repeat;
-}
-
-.container {
-    background-color: black;
-    min-height: 100vh;
-    padding: 0;
-}
-  
-.container {
-    border-color: rgb(255, 1, 1);
-    border-left: solid;
-    border-right: solid;
-    width: 50%;
-    margin: 0 auto;
+.content {
+  width: 100%;
+  height: 100%;
+  margin-bottom: 20px;
+  top: 5%;
+  margin-left: 3px;
+  margin-right: 3px;
 }
 
 .header{
@@ -35,6 +20,6 @@ html, body {
     
   }
 
-  .person {
+  .person a{
     color: white;
   }

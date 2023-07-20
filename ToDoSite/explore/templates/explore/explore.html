@@ -2,7 +2,7 @@
 {%load static%}
 
 {% block title %}
-<title>My profile</title>
+Explore
 {% endblock %}
 
 {% block main %}
@@ -19,8 +19,7 @@
 {% endblock %}
 
 {% block content %}
-<div class="box">
-    <div class="container">
+    <div class="main">
         <form id="form" role="search" style="margin-top: 10px;">
             <div class="searchbox">
                 <input type="search" id="query"  placeholder="Search..." aria-label="Search through site content">
@@ -28,7 +27,6 @@
             <div class="button">
                 <button>Search</button>
             </div>
-          </form>
+        </form>
     </div>
-</div>
 {% endblock %}
