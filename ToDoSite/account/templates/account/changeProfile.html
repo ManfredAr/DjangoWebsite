@@ -1,0 +1,26 @@
+{% extends "home/base.html" %}
+{%load static%}
+
+{% block title %}
+<title>Change Profile</title>
+{% endblock %}
+
+{% block main %}
+
+<body class="bg">
+
+{% endblock %}
+
+{% block style %}
+<link rel="stylesheet" type="text/css" media="screen" href="{%static 'css/changeProfile.css'%}">
+{% endblock %}
+
+{% block content %}
+<div class="changeImage">
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Save Profile</button>
+    </form>
+</div>
+{% endblock %}

@@ -8,12 +8,11 @@
 }
 
 .header {
-    padding: 60px;
-    text-align: center;
     background: #1abc9c;
     color: white;
     font-size: 30px;
     margin-top: 5px;
+    height: 300px;
 }
 
 .box {
@@ -79,4 +78,36 @@ button.disabled {
 .likes button {
     background: none;
     border: none
+}
+
+.header button {
+    border-radius: 12px;
+    width: 100px;
+    height: 35px;
+    font-size: 15px;
+    background: none;
+}
+
+.header h1, .header button {
+    display: inline;
+}
+
+.header h1, p {
+    margin-left: 5%;
+}
+
+.header button {
+    float: right;
+    margin-right: 10px;
+    margin-top: 20px;
+}
+
+.header img {
+    margin-top: 2%;
+    clip-path: circle();
+    width: 30%
+}
+
+.header p {
+    font-size: 15px
 }
