@@ -1,38 +1,24 @@
 html, body {
     height: 100%;
     margin: 0;
-}
-
-.bg {
     background-image: linear-gradient(rgba(136, 1, 138, 0.768), rgb(0, 28, 152));
     background-repeat: no-repeat;
+    background-attachment: fixed; /* Keep the background fixed while scrolling */
+    min-height: 100vh; /* Set the minimum height of the body to 100% of the viewport height */
 }
 
-body {
-    margin: 0;
-    padding: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    background-color: #f0f0f0;
-  }
-  
 .container {
-    width: 35%;
-    height: 200vh;
+    width: 30%;
     background-color: #000000;
     display: flex;
     justify-content: center;
-    align-items: center;
-    position: relative;
-    height: 100vh;
+    min-height: 100%;
 }
-  
+
 .sidebar {
     width: 20vh;
-    position: absolute;
-    left: -220px;
+    position: fixed;
+    left: 23%;
     top: 5%;
 }
 
