@@ -22,6 +22,9 @@
     margin-bottom: 3px;
     border-width: thin;
     padding: 10px;
+    display: flex; 
+    align-items: flex-start;
+    position: relative;
 }
 
 .lines {
@@ -52,7 +55,9 @@ a:hover {
 }
 
 .time {
-    float: right;
+    position: absolute; /* Position the time element absolutely */
+    top: 10px; /* Distance from the top of the .box container */
+    right: 10px;
     color: rgb(110, 118, 125);
 }
 
@@ -120,4 +125,14 @@ button.disabled {
 
 .header a::hover {
     text-decoration: underline;
+}
+
+.content img {
+    height: 40px;
+    width: 40px;
+    float: left;  
+}
+
+.place {
+    margin-left:10px
 }

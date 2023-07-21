@@ -4,6 +4,7 @@ from post.models import post
 import json
 from account.models import follower
 from backend.Post import Post
+from account.models import Profile
 
 # Create your views here.
 def explore(request):
@@ -13,8 +14,12 @@ def explore(request):
 def person(request, username):
     user_details = User.objects.get(username=username)
     Posts = Post.getPost(request, user_details)
-    followers = follower.objects.filter(followee=user_details)
-    following = follower.objects.filter(follower=user_details)
+    followers = follower.objects.filter(followee=user_details).count
+    following = follower.objects.filter(follower=user_details).count
+    if Profile.objects.filter(user=user_details).exists():
+        profile = Profile.objects.get(user=user_details)
+    else:
+        profile = Profile.objects.create(user_id=user_details.id, image="account-images/default.jpg", description="")
     
 
     if (request.method == "POST"):
@@ -27,7 +32,7 @@ def person(request, username):
                 follower_entry.delete()
 
     is_following = follower.objects.filter(follower=request.user, followee=user_details).exists()
-    return render(request, 'explore/person.html', {"profile": user_details, "posts": Posts, "follow": is_following, "followers":followers, "following":following})
+    return render(request, 'explore/person.html', {"profile":profile, "person": user_details, "posts": Posts, "follow": is_following, "followers":followers, "following":following})
 
 def followers(request, username):
     profile = User.objects.get(username=username)

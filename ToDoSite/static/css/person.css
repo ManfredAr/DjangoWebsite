@@ -64,6 +64,9 @@
   margin-bottom: 3px;
   border-width: thin;
   padding: 10px;
+  display: flex; 
+  align-items: flex-start;
+  position: relative;
 }
 
 .name a, .con, .time{
@@ -101,4 +104,53 @@ button.disabled {
 
 .press button, .press p {
   display: inline;
+}
+
+
+.header button {
+    border-radius: 12px;
+    width: 100px;
+    height: 35px;
+    font-size: 15px;
+    background: none;
+}
+
+.header h1, .header button {
+    display: inline;
+}
+
+.header button {
+    float: right;
+    margin-right: 10px;
+    margin-top: 20px;
+}
+
+.header img {
+    margin-top: 2%;
+    clip-path: circle();
+    width: 30%
+}
+
+.header p {
+    font-size: 15px
+}
+
+.header a {
+    font-weight: lighter;
+    font-size: 15px;
+    color: white;
+}
+
+.header a::hover {
+    text-decoration: underline;
+}
+
+.content img {
+  height: 40px;
+  width: 40px;
+  float: left;  
+}
+
+.place {
+  margin-left:10px
 }
