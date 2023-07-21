@@ -3,6 +3,7 @@ from django.contrib.auth.models import User
 from post.models import post
 import json
 from account.models import follower
+from backend.Post import Post
 
 # Create your views here.
 def explore(request):
@@ -11,7 +12,7 @@ def explore(request):
 
 def person(request, username):
     user_details = User.objects.get(username=username)
-    Posts = post.objects.filter(user=user_details).order_by('-time')
+    Posts = Post.getPost(request, user_details)
     followers = follower.objects.filter(followee=user_details)
     following = follower.objects.filter(follower=user_details)
     

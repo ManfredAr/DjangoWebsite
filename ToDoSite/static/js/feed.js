@@ -35,7 +35,7 @@ document.addEventListener('DOMContentLoaded', function() {
               if (responseData.user_like == true) {
                 document.getElementById(buttonId).style.color = "red";
               } else {
-                document.getElementById(buttonId).style.color = "black";
+                document.getElementById(buttonId).style.color = "white";
               }
               likeButton.classList.remove('disabled');
             } else {

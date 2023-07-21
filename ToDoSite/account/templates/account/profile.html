@@ -23,6 +23,9 @@
         <img src="{{ profile.image.url }}" alt="{{ profile.user.username }}'s Profile Image"> <br/>
         <h1>{{user.username}}</h1>
         <p>{{ profile.description }}</p>
+
+        <a href="/explore/{{user.username}}/followers"> {{ followers }} followers </a>
+        <a href="/explore/{{user.username}}/following"> {{ following }} following </a>
     </div>
 
     <div class="post">

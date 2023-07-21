@@ -60,7 +60,7 @@
                 posted: {{ post.time|timesince }}
             </div> <br>
             <div class="con">
-                <p> {{ post.text }} </p>
+                <p> {{ post.text|safe }} </p>
             </div>
             <div class="likes">
                 <form method="POST" id="{{post.id}}" class="like-form" data-form-id="{{post.id}}">

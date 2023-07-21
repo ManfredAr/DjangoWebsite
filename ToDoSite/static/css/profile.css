@@ -111,3 +111,13 @@ button.disabled {
 .header p {
     font-size: 15px
 }
+
+.header a {
+    font-weight: lighter;
+    margin-left: 5%;
+    font-size: 15px;
+}
+
+.header a::hover {
+    text-decoration: underline;
+}

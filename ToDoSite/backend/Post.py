@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from post.models import post, like
 from account.models import follower
 from django.contrib import messages
-from django.db.models import When, Case, BooleanField, F
+from django.db.models import Subquery, OuterRef, Exists
 from django.http import JsonResponse
 
 
@@ -27,11 +27,17 @@ class Post:
         following = follower.objects.filter(follower=request.user)
         following_users = [entry.followee for entry in following]
         posts = post.objects.filter(user__in=following_users).order_by('-time')
-        posts = posts.annotate(user_like=Case(
-            When(like__user=request.user, then=True),
-            default=False,
-            output_field=BooleanField()
-        ))
+        user_likes = like.objects.filter(user=request.user, post=OuterRef('pk'))
+        posts = posts.annotate(user_like=Exists(user_likes))
+        posts = posts.distinct()
+        return posts
+    
+    @staticmethod
+    def getPost(request, who):
+        posts = post.objects.filter(user=who).order_by('-time')
+        user_likes = like.objects.filter(user=request.user, post=OuterRef('pk'))
+        posts = posts.annotate(user_like=Exists(user_likes))
+        posts = posts.distinct()
         return posts
     
     @staticmethod

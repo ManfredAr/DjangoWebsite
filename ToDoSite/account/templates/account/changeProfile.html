@@ -17,9 +17,21 @@
 
 {% block content %}
 <div class="changeImage">
+    <div class="heading">
+        <h1> Change your profile </h1> <br/>
+    </div>
+
     <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
-        {{ form.as_p }}
+        <div class="form-group">
+            {{ form.image.label_tag }}
+            {{ form.image }}
+        </div>
+        <br/>
+        <div class="form-group">
+            {{ form.description.label_tag }}
+            <textarea class="form-control" name="{{ form.description.name }}" rows="4">{{ form.description.value }}</textarea>
+        </div>
         <button type="submit">Save Profile</button>
     </form>
 </div>
