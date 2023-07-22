@@ -12,14 +12,12 @@ class Post:
     def makePost(request):
         if request.method == "POST":
             content = request.POST['content']
-            if content == '':
-                messages.success(request, ("The post is empty please enter something"))
-                return redirect('/post/')
-            else:
-                content = content.replace('\n', '<br>')
-                newpost = post(user=request.user, text=content)
-                newpost.save()
-                return redirect('/home/')
+            content = content.replace('\n', '<br>')
+            tag = request.POST['tag']
+            tag = tag.replace(" ", "").lower()
+            newpost = post(user=request.user, text=content, tag=tag)
+            newpost.save()
+            return redirect('/home/')
         return render(request, 'post/post.html', {})
 
     @staticmethod

@@ -7,9 +7,6 @@
     margin-right: 3px;
 }
 
-h1 {
-    margin-top: 10px;
-}
 
 .box {
     border-style: solid;
@@ -71,4 +68,10 @@ button.disabled {
 
 .image {
   margin-right: 10px;
+}
+
+.title {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
 }
