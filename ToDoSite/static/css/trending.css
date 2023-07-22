@@ -15,3 +15,11 @@
     border-style: solid;
     border-width: 1px
 }
+
+button {
+    width:100%;
+}
+
+a {
+    color:white;
+}

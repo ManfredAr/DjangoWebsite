@@ -3,6 +3,7 @@ from django.utils import timezone
 from django.shortcuts import render
 from post.models import post
 from django.db.models import Count
+from backend.Post import Post
 
 # Create your views here.
 def trending(request):
@@ -13,5 +14,6 @@ def trending(request):
 
     return render(request, 'trending/trending.html', {"categories":top_10_categories})
 
-def topic(request, topic):
-    return render(request, 'trending/trending.html', {"posts":posts})
+def getTopicPosts(request, topic):
+    posts = Post.getTopicPosts(request, topic)
+    return render(request, 'trending/topic.html', {"topic":topic, "posts":posts})

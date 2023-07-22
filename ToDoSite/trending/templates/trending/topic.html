@@ -1,0 +1,63 @@
+{% extends "home/base.html" %}
+{%load static%}
+
+{% block title %}
+{{topic}}
+{% endblock %}
+
+{% block main %}
+
+<body class="bg">
+
+{% endblock %}
+
+{% block style %}
+<link rel="stylesheet" type="text/css" media="screen" href="{%static 'css/feed.css'%}">
+<script src="{% static 'js/feed.js' %}"></script>
+{% endblock %}
+
+{% block content %}
+<div class="content">
+    <div class="title">
+        <div class="name">
+            <h1 style="color: rgb(255, 255, 255);">{{topic}}</h1>
+        </div>
+    </div>
+    {% for post in posts %}
+    <div class="box"> 
+        <div class="image">
+            <img src="/media/{{ post.creator_profile_image }}" alt="Profile Image">
+        </div>
+        <div class="place">
+            <div class="name">
+                <a href="/explore/{{post.user.username}}">{{ post.user.username }}</a>
+            </div> 
+            <div class="time">
+                posted: {{ post.time|timesince }}
+            </div> <br>
+            <div class="con">
+                <p> {{ post.text|safe }} </p>
+            </div>
+            <div class="likes">
+                <form method="POST" id="{{post.id}}" class="like-form" data-form-id="{{post.id}}">
+                    {% csrf_token %}
+                    <div class="press">
+                        {% if post.user_like %}
+                            <button style="color: red;" type="submit" name="is-liked" id="{{post.id}}like"> 
+                                <i class="fa fa-heart"></i>
+                            </button> 
+                        {% else %}
+                            <button style="color: rgb(255, 255, 255);" type="submit" name="is-liked" id="{{post.id}}like">  
+                                <i class="fa fa-heart"></i>
+                            </button> 
+                        {% endif %}
+                        <p id="like-count-{{post.id}}"> {{post.likes}} </p>
+                    </div>
+                </form> 
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+{% endblock %}

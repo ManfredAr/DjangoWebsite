@@ -72,3 +72,14 @@ class Post:
 
         # Return a JSON response indicating error
         return JsonResponse({'error': 'Invalid request.'}, status=400)
+    
+    @staticmethod
+    def getTopicPosts(request, topic):
+        posts = post.objects.filter(tag=topic).order_by('-time')
+
+        user_likes = like.objects.filter(user=request.user, post=OuterRef('pk'))
+        posts = posts.annotate(user_like=Exists(user_likes))
+
+        profiles = Profile.objects.filter(user__in=Subquery(posts.values('user')))
+        posts = posts.annotate(creator_profile_image=Subquery(profiles.filter(user=OuterRef('user')).values('image')[:1]))
+        return posts

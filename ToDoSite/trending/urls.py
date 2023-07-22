@@ -3,5 +3,5 @@ from . import views
 
 urlpatterns = [
     path('', views.trending),
-    path('<str:topic>', views.topic),
+    path('<str:topic>', views.getTopicPosts),
 ]
