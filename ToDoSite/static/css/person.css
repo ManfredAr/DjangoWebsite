@@ -31,8 +31,12 @@
   display: flex;
 }
 
-.followers a, .following a {
-  color:white;
+.followers, .following {
+  display: inline-block;
+}
+
+.following {
+  margin-left:10px;
 }
 
 .top {
