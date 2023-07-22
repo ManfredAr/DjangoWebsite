@@ -24,7 +24,12 @@
     <div class="follow">
         {% for i in followers %}
             <div class="person">
-                <a href="/explore/{{i.follower.username}}"> {{ i.follower.username }} </a>
+                <div class="image">
+                    <img src="/media/{{ i.creator_profile_image }}">
+                </div>
+                <div class="name">
+                    <a href="/explore/{{i.follower.username}}"> {{ i.follower.username }} </a>
+                </div>
             </div>
         {% endfor %}
     </div>

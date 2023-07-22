@@ -8,12 +8,11 @@
 }
 
 .header {
-    padding: 60px;
-    text-align: center;
     background: #1abc9c;
     color: white;
     font-size: 30px;
     margin-top: 5px;
+    height: 300px;
 }
 
 .box {
@@ -23,6 +22,9 @@
     margin-bottom: 3px;
     border-width: thin;
     padding: 10px;
+    display: flex; 
+    align-items: flex-start;
+    position: relative;
 }
 
 .lines {
@@ -53,7 +55,9 @@ a:hover {
 }
 
 .time {
-    float: right;
+    position: absolute; /* Position the time element absolutely */
+    top: 10px; /* Distance from the top of the .box container */
+    right: 10px;
     color: rgb(110, 118, 125);
 }
 
@@ -79,4 +83,56 @@ button.disabled {
 .likes button {
     background: none;
     border: none
+}
+
+.header button {
+    border-radius: 12px;
+    width: 100px;
+    height: 35px;
+    font-size: 15px;
+    background: none;
+}
+
+.header h1, .header button {
+    display: inline;
+}
+
+.header h1, p {
+    margin-left: 5%;
+}
+
+.header button {
+    float: right;
+    margin-right: 10px;
+    margin-top: 20px;
+}
+
+.header img {
+    margin-top: 2%;
+    clip-path: circle();
+    width: 30%
+}
+
+.header p {
+    font-size: 15px
+}
+
+.header a {
+    font-weight: lighter;
+    margin-left: 5%;
+    font-size: 15px;
+}
+
+.header a::hover {
+    text-decoration: underline;
+}
+
+.content img {
+    height: 40px;
+    width: 40px;
+    float: left;  
+}
+
+.place {
+    margin-left:10px
 }

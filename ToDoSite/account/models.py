@@ -10,3 +10,12 @@ class follower(models.Model):
 
     def __str__(self):
         return self.follower.username + " followed " + self.followee.username
+
+
+class Profile(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='profile')
+    image = models.ImageField(upload_to='account-images/')
+    description = models.CharField(max_length=200)
+
+    def __str__(self):
+        return self.user.username + " : " + self.description

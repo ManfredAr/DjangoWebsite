@@ -1,0 +1,38 @@
+{% extends "home/base.html" %}
+{%load static%}
+
+{% block title %}
+<title>Change Profile</title>
+{% endblock %}
+
+{% block main %}
+
+<body class="bg">
+
+{% endblock %}
+
+{% block style %}
+<link rel="stylesheet" type="text/css" media="screen" href="{%static 'css/changeProfile.css'%}">
+{% endblock %}
+
+{% block content %}
+<div class="changeImage">
+    <div class="heading">
+        <h1> Change your profile </h1> <br/>
+    </div>
+
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="form-group">
+            {{ form.image.label_tag }}
+            {{ form.image }}
+        </div>
+        <br/>
+        <div class="form-group">
+            {{ form.description.label_tag }}
+            <textarea class="form-control" name="{{ form.description.name }}" rows="4">{{ form.description.value }}</textarea>
+        </div>
+        <button type="submit">Save Profile</button>
+    </form>
+</div>
+{% endblock %}

@@ -19,31 +19,27 @@
 {% block content %}
 <div class="main">
     <div class="header">
-        <div class="top">
-            <div class="heading">
-                <h1>{{profile.username}}</h1>
-            </div>
-            <form method="POST">
-                <div class="follow">
-                    {% csrf_token %}
-                    {% if user.username == profile.username %}
+        <form method="POST">
+            <div class="follow">
+                {% csrf_token %}
+                {% if user.username == person.username %}
 
-                    {% elif follow == True  %} 
-                        <button type="submit" name="choice" value="Unfollow"> Unfollow </button>
-                    {% else %}
-                        <button type="submit" name="choice" value="follow"> Follow </button>
-                    {% endif %}
-                </div>
-            </form>
-        </div>
-        <br/>
-        <div class="info">
-            <div class="followers">
-                <a href="/explore/{{profile.username}}/followers"> <strong>{{ followers.count }}</strong> <div class="light">followers</div></a>
+                {% elif follow == True  %} 
+                    <button type="submit" name="choice" value="Unfollow"> Unfollow </button>
+                {% else %}
+                    <button type="submit" name="choice" value="follow"> Follow </button>
+                {% endif %}
             </div>
-            <div class="separator"></div>
+        </form>
+        <img src="{{ profile.image.url }}" alt="{{ profile.user.username }}'s Profile Image" width="100" height="100"> <br/>
+        <h1>{{person.username}}</h1>
+        <p>{{ profile.description }}</p>
+        <div class="others">
+            <div class="followers">
+                <a href="/explore/{{person.username}}/followers"> {{ followers }} followers </a>
+            </div>
             <div class="following">
-                <a href="/explore/{{profile.username}}/following"> <strong>{{ following.count }}</strong> <div class="light">following</div></a>
+                <a href="/explore/{{person.username}}/following"> {{ following }} following </a>
             </div>
         </div>
     </div>
@@ -53,31 +49,36 @@
         </div>
         {% for post in posts %}
         <div class="box"> 
-            <div class="name">
-                <a href="/explore/{{post.user.username}}">{{ post.user.username }}</a>
-            </div> 
-            <div class="time">
-                posted: {{ post.time|timesince }}
-            </div> <br>
-            <div class="con">
-                <p> {{ post.text }} </p>
+            <div class="image">
+                <img src="{{ profile.image.url }}" alt="{{ profile.user.username }}'s Profile Image" width="100" height="100"> <br/>
             </div>
-            <div class="likes">
-                <form method="POST" id="{{post.id}}" class="like-form" data-form-id="{{post.id}}">
-                    {% csrf_token %}
-                    <div class="press">
-                        {% if post.user_like %}
-                            <button style="color: red;" type="submit" name="is-liked" id="{{post.id}}like"> 
-                                <i class="fa fa-heart"></i>
-                            </button> 
-                        {% else %}
-                            <button style="color: rgb(255, 255, 255);" type="submit" name="is-liked" id="{{post.id}}like">  
-                                <i class="fa fa-heart"></i>
-                            </button> 
-                        {% endif %}
-                        <p id="like-count-{{post.id}}"> {{post.likes}} </p>
-                    </div>
-                </form> 
+            <div class="place">
+                <div class="name">
+                    <a href="/explore/{{post.user.username}}">{{ post.user.username }}</a>
+                </div> 
+                <div class="time">
+                    posted: {{ post.time|timesince }}
+                </div> <br>
+                <div class="con">
+                    <p> {{ post.text|safe }} </p>
+                </div>
+                <div class="likes">
+                    <form method="POST" id="{{post.id}}" class="like-form" data-form-id="{{post.id}}">
+                        {% csrf_token %}
+                        <div class="press">
+                            {% if post.user_like %}
+                                <button style="color: red;" type="submit" name="is-liked" id="{{post.id}}like"> 
+                                    <i class="fa fa-heart"></i>
+                                </button> 
+                            {% else %}
+                                <button style="color: rgb(255, 255, 255);" type="submit" name="is-liked" id="{{post.id}}like">  
+                                    <i class="fa fa-heart"></i>
+                                </button> 
+                            {% endif %}
+                            <p id="like-count-{{post.id}}"> {{post.likes}} </p>
+                        </div>
+                    </form> 
+                </div>
             </div>
         </div>
         {% endfor %}

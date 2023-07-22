@@ -18,6 +18,9 @@ h1 {
     margin-bottom: 3px;
     border-width: thin;
     padding: 10px;
+    display: flex; 
+    align-items: flex-start;
+    position: relative;
 }
 
 .name a, .con, .time{
@@ -29,7 +32,9 @@ h1 {
 }
 
 .time {
-    float: right;
+    position: absolute; /* Position the time element absolutely */
+    top: 10px; /* Distance from the top of the .box container */
+    right: 10px;
     color: rgb(110, 118, 125);
 }
 
@@ -55,4 +60,15 @@ button.disabled {
 
 .press button, .press p {
     display: inline;
+}
+
+.content img {
+    height: 40px;
+    width: 40px;
+    float: left;
+    
+}
+
+.image {
+  margin-right: 10px;
 }

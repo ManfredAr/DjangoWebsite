@@ -16,10 +16,25 @@
     max-width: 100%;
   }
 
-  .follow {
-    
-  }
-
   .person a{
     color: white;
   }
+
+.image img {
+  width: 50px;
+  height: 50px
+}
+
+.follow {
+  margin-top: 20px;
+}
+
+.person {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.name a {
+  margin-left: 10px;
+}

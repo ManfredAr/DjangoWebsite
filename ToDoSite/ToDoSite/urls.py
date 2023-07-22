@@ -17,7 +17,9 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from register.views import login_user, register_user, logout_user
-from account.views import profile
+from account.views import profile, changeProfile
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -27,5 +29,9 @@ urlpatterns = [
     path('logout/', logout_user),
     path('post/', include("post.urls")),
     path('profile/', profile),
+    path('change-profile/', changeProfile),
     path('explore/', include("explore.urls")),
 ]
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
