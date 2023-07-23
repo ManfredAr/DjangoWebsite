@@ -16,10 +16,33 @@
     border-width: 1px
 }
 
-button {
+.category button {
     width:100%;
 }
 
 a {
     color:white;
+}
+
+.main {
+    display: Flex;
+    justify-content: center
+}
+
+.searchbox {
+    display: inline;
+}
+
+input {
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.button {
+    display: inline;
+    background-color: aqua;
+}
+
+.error {
+    text-align: center;
 }

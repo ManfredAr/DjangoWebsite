@@ -20,7 +20,11 @@
 <div class="content">
     <div class="title">
         <div class="name">
+            {% if posts %}
             <h1 style="color: rgb(255, 255, 255);">{{topic}}</h1>
+            {% else %}
+            <h1 style="color: rgb(255, 255, 255);">No posts found for search: {{topic}}</h1>
+            {% endif %}
         </div>
     </div>
     {% for post in posts %}
@@ -37,6 +41,7 @@
             </div> <br>
             <div class="con">
                 <p> {{ post.text|safe }} </p>
+                <p> #{{ post.tag }} </p>
             </div>
             <div class="likes">
                 <form method="POST" id="{{post.id}}" class="like-form" data-form-id="{{post.id}}">

@@ -4,6 +4,7 @@
 
 {% block style %}
 <link rel="stylesheet" type="text/css" media="screen" href="{% static 'css/trending.css' %}">
+<script src="{% static 'js/trending.js' %}"></script>
 {% endblock %}
 
 {% block main %}
@@ -15,7 +16,24 @@
     <div class="heading">
         <h1> Trending Right Now </h1>
     </div>
+    <br/>
+    <div class="main">
+        <form id="form" method="POST" onsubmit="return validateForm()">
+            {% csrf_token %}
+            <div class="searchbox">
+                <input id="query" name="search" placeholder="Search...">
+            </div>
+            <div class="button">
+                <button type="submit" id="submitButton">Search</button>
+            </div>
+        </form>
+    </div>
 
+    <div class="error" id="form-error" style="display: none;">
+        <p style="color: red;">Cannot be empty</p>
+    </div>
+
+    <br/>
     <div class="categories">
         {% for category in categories %}
         <div class="category">
