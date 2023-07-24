@@ -12,14 +12,12 @@ class Post:
     def makePost(request):
         if request.method == "POST":
             content = request.POST['content']
-            if content == '':
-                messages.success(request, ("The post is empty please enter something"))
-                return redirect('/post/')
-            else:
-                content = content.replace('\n', '<br>')
-                newpost = post(user=request.user, text=content)
-                newpost.save()
-                return redirect('/home/')
+            content = content.replace('\n', '<br>')
+            tag = request.POST['tag']
+            tag = tag.replace(" ", "").lower()
+            newpost = post(user=request.user, text=content, tag=tag)
+            newpost.save()
+            return redirect('/home/')
         return render(request, 'post/post.html', {})
 
     @staticmethod
@@ -74,3 +72,25 @@ class Post:
 
         # Return a JSON response indicating error
         return JsonResponse({'error': 'Invalid request.'}, status=400)
+    
+    @staticmethod
+    def getTopicPosts(request, topic):
+        posts = post.objects.filter(tag=topic).order_by('-time')
+
+        user_likes = like.objects.filter(user=request.user, post=OuterRef('pk'))
+        posts = posts.annotate(user_like=Exists(user_likes))
+
+        profiles = Profile.objects.filter(user__in=Subquery(posts.values('user')))
+        posts = posts.annotate(creator_profile_image=Subquery(profiles.filter(user=OuterRef('user')).values('image')[:1]))
+        return posts
+    
+    @staticmethod
+    def getSearchPosts(request, search):
+        posts = post.objects.filter(text__icontains=search).order_by('-time')
+
+        user_likes = like.objects.filter(user=request.user, post=OuterRef('pk'))
+        posts = posts.annotate(user_like=Exists(user_likes))
+
+        profiles = Profile.objects.filter(user__in=Subquery(posts.values('user')))
+        posts = posts.annotate(creator_profile_image=Subquery(profiles.filter(user=OuterRef('user')).values('image')[:1]))
+        return posts

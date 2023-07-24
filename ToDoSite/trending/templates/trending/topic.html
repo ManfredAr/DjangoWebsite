@@ -2,7 +2,7 @@
 {%load static%}
 
 {% block title %}
-Your feed
+{{topic}}
 {% endblock %}
 
 {% block main %}
@@ -20,7 +20,11 @@ Your feed
 <div class="content">
     <div class="title">
         <div class="name">
-            <h1 style="color: rgb(255, 255, 255);">Your Feed</h1>
+            {% if posts %}
+            <h1 style="color: rgb(255, 255, 255);">{{topic}}</h1>
+            {% else %}
+            <h1 style="color: rgb(255, 255, 255);">No posts found for search: {{topic}}</h1>
+            {% endif %}
         </div>
     </div>
     {% for post in posts %}

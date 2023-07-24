@@ -31,6 +31,7 @@ urlpatterns = [
     path('profile/', profile),
     path('change-profile/', changeProfile),
     path('explore/', include("explore.urls")),
+    path('topic/', include("trending.urls")),
 ]
 
 if settings.DEBUG:

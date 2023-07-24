@@ -8,6 +8,7 @@ class post(models.Model):
     text = models.CharField(max_length=300)
     time = models.DateTimeField(auto_now_add=True)
     likes = models.IntegerField(default=0)
+    tag = models.CharField(max_length=40, default="news", null=False)
 
     def __str__(self):
         return self.text

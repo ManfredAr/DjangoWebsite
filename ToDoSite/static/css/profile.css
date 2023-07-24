@@ -136,3 +136,7 @@ button.disabled {
 .place {
     margin-left:10px
 }
+
+.con p {
+    margin: 0;
+}

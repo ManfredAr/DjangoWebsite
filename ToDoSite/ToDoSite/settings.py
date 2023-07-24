@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'post.apps.PostConfig',
     'account.apps.AccountConfig',
     'explore.apps.ExploreConfig',
+    'trending.apps.TrendingConfig',
 ]
 
 MIDDLEWARE = [

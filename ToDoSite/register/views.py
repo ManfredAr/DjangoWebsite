@@ -30,7 +30,7 @@ def register_user(request):
             user = authenticate(request, username=username, password=password)
             login(request, user)
             #messages.success("request", str("Registration was successful"))
-            return render(request, 'post/feed.html', {})
+            return redirect(request, '/post/feed', {})
     else:
         form = RegisterUser()    
     return render(request, 'register/register.html', {"form": form})
