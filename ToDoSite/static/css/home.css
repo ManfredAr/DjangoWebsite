@@ -10,7 +10,6 @@ html, body {
 .container {
     width: 30%;
     background-color: #000000;
-    display: flex;
     justify-content: center;
     min-height: 100%;
 }

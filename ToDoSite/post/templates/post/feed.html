@@ -36,29 +36,64 @@ Your feed
                 posted: {{ post.time|timesince }}
             </div> <br>
             <div class="con">
-                <p> {{ post.text|safe }} </p>
+                <p id="p{{post.id}}"> {{ post.text|safe }} </p>
                 <p> #{{ post.tag }} </p>
             </div>
-            <div class="likes">
-                <form method="POST" id="{{post.id}}" class="like-form" data-form-id="{{post.id}}">
-                    {% csrf_token %}
-                    <div class="press">
-                        {% if post.user_like %}
-                            <button style="color: red;" type="submit" name="is-liked" id="{{post.id}}like"> 
-                                <i class="fa fa-heart"></i>
-                            </button> 
-                        {% else %}
-                            <button style="color: rgb(255, 255, 255);" type="submit" name="is-liked" id="{{post.id}}like">  
-                                <i class="fa fa-heart"></i>
-                            </button> 
-                        {% endif %}
-                        <p id="like-count-{{post.id}}"> {{post.likes}} </p>
-                    </div>
-                </form> 
+            <div class="options">
+                <div class="likes">
+                    <form method="POST" id="{{post.id}}" class="like-form" data-form-id="{{post.id}}">
+                        {% csrf_token %}
+                        <div class="press">
+                            {% if post.user_like %}
+                                <button style="color: red;" type="submit" name="is-liked" id="{{post.id}}like"> 
+                                    <i class="fa fa-heart"></i>
+                                </button> 
+                            {% else %}
+                                <button style="color: rgb(255, 255, 255);" type="submit" name="is-liked" id="{{post.id}}like">  
+                                    <i class="fa fa-heart"></i>
+                                </button> 
+                            {% endif %}
+                            <p id="like-count-{{post.id}}"> {{post.likes}} </p>
+                        </div>
+                    </form> 
+                </div>
+                <div class="comment">
+                    <button type="button" class="comment-button" data-post-id="{{ post.id }}">
+                        <i class="fa fa-comment"></i>
+                    </button> 
+                    <p> 0 </p>
+                </div>
             </div>
         </div>
     </div>
     {% endfor %}
-</div>
 
+</div>
+{% endblock %}
+
+{% block popup %}
+<div class="popup" id="popup" style="display: none;">
+    <div class="close">
+        <button type="button" onclick="remove()">
+            <i class="fa fa-close"></i>
+        </button> 
+    </div>
+    <div id="originID" style="visibility: hidden;"> </div>
+    <div class="popup-content">
+        <div class="post">
+            <p id="PrevPost">  </p>
+        </div>
+        <h2>Comment</h2>
+        <form method="POST" id="commentForm">
+            {% csrf_token %}
+            <textarea class="form-control" name="content" id="postContent" maxlength="300" rows="4" cols="7"></textarea> <br> <br>
+            <div style="text-align: center;">
+                <button type="submit" id="submitButton"> Post </button>
+            </div>
+        </form>
+        <div id="error" style="display: none; text-align: center; color: red;">
+            <p> Post cannot be empty </p>
+        </div>
+    </div>
+</div>
 {% endblock %}
