@@ -47,8 +47,11 @@
                     <img src="{{ profile.image.url }}" alt="Profile Image" width="50" height="50">
                 </div> 
                 <div class="place">
+                    {% if post.referenced_post_pk %}
+                        <a href="{% url 'comments' post_id=post.referenced_post_pk %}"> Replying to post </a><br/>
+                    {% endif %}
                     <div class="name">
-                        <a href="/profile">{{ user.username }}</a>
+                        <a href="/profile">{{ post.user.username }}</a>
                     </div> 
                     <div class="time">
                         posted: {{ post.time|timesince }}

@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from post.models import post, like
 from account.models import follower, Profile
 from django.contrib import messages
-from django.db.models import Subquery, OuterRef, Exists, Count
+from django.db.models import Subquery, OuterRef, Exists, Count, F
 from django.http import JsonResponse
 from django.db import models
 
@@ -40,19 +40,26 @@ class Post:
         # Annotate the 'comment_count' field to get the number of comments for each post
         comment_counts = post.objects.filter(referenced_post=OuterRef('pk')).values('pk').annotate(comment_count=Count('pk'))
         posts = posts.annotate(comment_count=Subquery(comment_counts.values('comment_count')))
-        print(posts[0].comment_count)
+
+        referenced_posts = post.objects.filter(id=OuterRef('referenced_post')).values('text', 'id')
+        posts = posts.annotate(referenced_post_pk=Subquery(referenced_posts.values('id')[:1]))
         return posts
 
 
 
     @staticmethod
     def getPost(request, who):
-        posts = post.objects.filter(user=who).order_by('-time')
-        user_likes = like.objects.filter(user=request.user, post=OuterRef('pk'))
-        posts = posts.annotate(user_like=Exists(user_likes))
-        posts = posts.distinct()
         comment_counts = post.objects.filter(referenced_post=OuterRef('pk')).values('pk').annotate(comment_count=Count('pk'))
+
+        # Annotate the comment_count field to get the number of comments for each post
+        posts = post.objects.filter(user=who).order_by('-time')
+        posts = posts.annotate(user_like=Exists(like.objects.filter(user=request.user, post=OuterRef('pk'))))
+        posts = posts.distinct()
         posts = posts.annotate(comment_count=Subquery(comment_counts.values('comment_count')))
+
+        # Annotate the referenced_post for each comment post
+        referenced_posts = post.objects.filter(id=OuterRef('referenced_post')).values('text', 'id')
+        posts = posts.annotate(referenced_post_pk=Subquery(referenced_posts.values('id')[:1]))
         return posts
     
 
@@ -90,6 +97,8 @@ class Post:
 
         profiles = Profile.objects.filter(user__in=Subquery(posts.values('user')))
         posts = posts.annotate(creator_profile_image=Subquery(profiles.filter(user=OuterRef('user')).values('image')[:1]))
+        referenced_posts = post.objects.filter(id=OuterRef('referenced_post')).values('text', 'id')
+        posts = posts.annotate(referenced_post_pk=Subquery(referenced_posts.values('id')[:1]))
         return posts
     
     @staticmethod
@@ -101,6 +110,8 @@ class Post:
 
         profiles = Profile.objects.filter(user__in=Subquery(posts.values('user')))
         posts = posts.annotate(creator_profile_image=Subquery(profiles.filter(user=OuterRef('user')).values('image')[:1]))
+        referenced_posts = post.objects.filter(id=OuterRef('referenced_post')).values('text', 'id')
+        posts = posts.annotate(referenced_post_pk=Subquery(referenced_posts.values('id')[:1]))
         return posts
     
     @staticmethod
