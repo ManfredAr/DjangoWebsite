@@ -59,7 +59,7 @@ document.addEventListener('DOMContentLoaded', function() {
     commentButtons.forEach(function(button) {
         button.addEventListener('click', function() {
             var postId = button.dataset.postId;
-            var postContent = document.getElementById("p" + postId).textContent;
+            var postContent = document.getElementById("p" + postId).innerHTML;
             document.getElementById('originID').innerHTML = postId;
             var popupContent = document.getElementById("PrevPost");
             popupContent.innerText = postContent;
@@ -73,16 +73,47 @@ document.addEventListener('DOMContentLoaded', function() {
 
 function remove() {
   document.getElementById("popup").style.display = "none";
+  document.getElementById('error').style.display = 'none';
 }
 
 
 document.addEventListener('DOMContentLoaded', function() {
   document.getElementById('commentForm').addEventListener('submit', function(event) {
     event.preventDefault();
-    const formData = new FormData(this);
-    postId = document.getElementById('originID').innerHTML;
-    formData.append('post_id', postId);
-    console.log(formData);
+
+    var comment = document.getElementById('submitButton');
+    if (comment.classList.contains('disabled')) {
+      return; 
+    }
+
+    comment.classList.add('disabled');
+
+    message = document.getElementById('postContent').value
+    if (message == "") {
+      document.getElementById('error').style.display = 'block';
+    } else {
+      const formData = new FormData(this);
+      postId = document.getElementById('originID').innerHTML;
+      formData.append('post_id', postId);
+  
+      const xhr = new XMLHttpRequest();
+      xhr.open('POST', '/post/create-comment'); 
+      xhr.setRequestHeader('X-CSRFToken', formData.get('csrfmiddlewaretoken'));
+      xhr.onreadystatechange = function() {
+      if (xhr.readyState === XMLHttpRequest.DONE) {
+          if (xhr.status === 200) {
+            popup.style.display = 'none';
+            comment.classList.remove('disabled');
+            location.reload();
+          } else {
+            console.error('Request failed:', xhr.status);
+            comment.classList.remove('disabled');
+          }
+      }
+      };
+      xhr.send(formData);
+    }
+    comment.classList.remove('disabled');
   })
 });
 
