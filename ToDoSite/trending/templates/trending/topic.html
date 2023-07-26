@@ -43,7 +43,7 @@
                 posted: {{ post.time|timesince }}
             </div> <br>
             <div class="con">
-                <p> {{ post.text|safe }} </p>
+                <p id="p{{post.id}}"> {{ post.text|safe }} </p>
                 <p> #{{ post.tag }} </p>
             </div>
             <div class="options">

@@ -1,10 +1,7 @@
 from django.shortcuts import render, redirect
 from post.models import post, like
 from account.models import follower, Profile
-from django.contrib import messages
 from django.db.models import Subquery, OuterRef, Exists, Count, F
-from django.http import JsonResponse
-from django.db import models
 
 
 class Post:
@@ -23,6 +20,10 @@ class Post:
 
     @staticmethod
     def getFeed(request):
+        '''
+        Method returns all the posts made by users followed. It includes the post, 
+        comment count, like count and also if the user has like the post or not.
+        '''
         following = follower.objects.filter(follower=request.user)
         following_users = [entry.followee for entry in following]
 
@@ -62,32 +63,6 @@ class Post:
         posts = posts.annotate(referenced_post_pk=Subquery(referenced_posts.values('id')[:1]))
         return posts
     
-
-    
-    @staticmethod
-    def userLike(request):
-        if request.method == "POST":
-            post_id = request.POST.get("form_id")
-            post_obj = post.objects.get(id=post_id)
-            user_like = True;
-            button = "like-count-" + post_id
-            if (like.objects.filter(post=post_obj, user=request.user).exists()):
-                user_like = False
-                like_obj = like.objects.get(post_id=post_id, user_id=request.user.id)
-                like_obj.delete()
-                post_obj.likes = like.objects.filter(post_id=post_id).count()
-                post_obj.save()
-            else:
-                like.objects.create(post=post_obj, user=request.user)
-                post_obj.likes = like.objects.filter(post_id=post_id).count()
-                post_obj.save()
-
-            # Return a JSON response indicating success
-            return JsonResponse({'like_count': post_obj.likes, 'user_like': user_like, 'id': button, 'post_id':post_id})
-
-        # Return a JSON response indicating error
-        return JsonResponse({'error': 'Invalid request.'}, status=400)
-    
     @staticmethod
     def getTopicPosts(request, topic):
         posts = post.objects.filter(tag=topic).order_by('-time')
@@ -99,6 +74,8 @@ class Post:
         posts = posts.annotate(creator_profile_image=Subquery(profiles.filter(user=OuterRef('user')).values('image')[:1]))
         referenced_posts = post.objects.filter(id=OuterRef('referenced_post')).values('text', 'id')
         posts = posts.annotate(referenced_post_pk=Subquery(referenced_posts.values('id')[:1]))
+        comment_counts = post.objects.filter(referenced_post=OuterRef('pk')).values('pk').annotate(comment_count=Count('pk'))
+        posts = posts.annotate(comment_count=Subquery(comment_counts.values('comment_count')))
         return posts
     
     @staticmethod
@@ -112,24 +89,7 @@ class Post:
         posts = posts.annotate(creator_profile_image=Subquery(profiles.filter(user=OuterRef('user')).values('image')[:1]))
         referenced_posts = post.objects.filter(id=OuterRef('referenced_post')).values('text', 'id')
         posts = posts.annotate(referenced_post_pk=Subquery(referenced_posts.values('id')[:1]))
-        return posts
-    
-    @staticmethod
-    def getComments(request, post_id):
-        main = post.objects.get(id=post_id);
-        comments = post.objects.filter(referenced_post=main).order_by('-time')
-        main_post = post.objects.filter(id=post_id)
-        comments = main_post | comments
-
-        user_likes = like.objects.filter(user=request.user, post=OuterRef('pk'))
-        comments = comments.annotate(user_like=Exists(user_likes))
-
-        # Annotate the 'creator_profile_image' field to get the profile picture of the post creator
-        profiles = Profile.objects.filter(user__in=Subquery(comments.values('user')))
-        comments = comments.annotate(creator_profile_image=Subquery(profiles.filter(user=OuterRef('user')).values('image')[:1]))
-
-        # Annotate the 'comment_count' field to get the number of comments for each post
         comment_counts = post.objects.filter(referenced_post=OuterRef('pk')).values('pk').annotate(comment_count=Count('pk'))
-        comments = comments.annotate(comment_count=Subquery(comment_counts.values('comment_count')))
-        return comments
+        posts = posts.annotate(comment_count=Subquery(comment_counts.values('comment_count')))
+        return posts
         

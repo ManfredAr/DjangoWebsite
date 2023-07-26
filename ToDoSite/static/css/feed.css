@@ -73,7 +73,6 @@ button.disabled {
 .title {
     display: flex;
     justify-content: space-between;
-    margin-top: 10px;
 }
 
 .comment button {
