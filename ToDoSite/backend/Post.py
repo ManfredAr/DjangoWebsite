@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from post.models import post, like
 from account.models import follower, Profile
 from django.db.models import Subquery, OuterRef, Exists, Count, F
+from post.forms import PostForm
 
 
 class Post:
@@ -9,14 +10,18 @@ class Post:
     @staticmethod
     def makePost(request):
         if request.method == "POST":
-            content = request.POST['content']
-            content = content.replace('\n', '<br>')
-            tag = request.POST['tag']
-            tag = tag.replace(" ", "").lower()
-            newpost = post(user=request.user, text=content, tag=tag)
-            newpost.save()
-            return redirect('/home/')
-        return render(request, 'post/post.html', {})
+            form = PostForm(request.POST, request.FILES)
+            if form.is_valid():
+                text = form.cleaned_data['text']
+                tag = form.cleaned_data['tag']
+                image = form.cleaned_data['image']
+                text = text.replace('\n', '<br>')
+                tag = tag.replace(" ", "").lower()
+                newpost = post(user=request.user, text=text, tag=tag, image=image)
+                newpost.save()
+                return redirect('/home/')
+        form = PostForm()
+        return render(request, 'post/post.html', {'form':form})
 
     @staticmethod
     def getFeed(request):

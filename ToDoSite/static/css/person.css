@@ -189,3 +189,7 @@ button.disabled {
 .click {
     color: white;
 }
+
+.popup-content h2 {
+  color: black;
+}

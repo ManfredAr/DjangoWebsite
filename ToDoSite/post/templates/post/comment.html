@@ -36,6 +36,9 @@ Your feed
             </div> <br>
             <div class="con">
                 <p id="p{{main.id}}"> {{ main.text|safe }} </p>
+                {% if post.image %}
+                <img src="/media/{{ post.image }}" alt="Profile Image" width="100" height="100">
+                {% endif %}
                 <p> #{{ main.tag }} </p>
             </div>
             <div class="options">
@@ -90,6 +93,9 @@ Your feed
             </div> <br>
             <div class="con">
                 <p id="p{{post.id}}"> {{ post.text|safe }} </p>
+                {% if post.image %}
+                <img src="/media/{{ post.image }}" alt="Profile Image" width="100" height="100">
+                {% endif %}
                 <p> #{{ post.tag }} </p>
             </div>
             <div class="options">
@@ -149,6 +155,8 @@ Your feed
         <form method="POST" id="commentForm">
             {% csrf_token %}
             <textarea class="form-control" name="content" id="postContent" maxlength="300" rows="4" cols="7"></textarea> <br> <br>
+            <label for="id_image">Image:</label> <br/>
+            <input type="file" name="image" id="id_image">
             <div style="text-align: center;">
                 <button type="submit" id="submitButton"> Post </button>
             </div>

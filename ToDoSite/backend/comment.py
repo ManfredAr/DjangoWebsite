@@ -27,5 +27,6 @@ class comment:
     def createComment(request):
         post_id = request.POST.get("post_id")
         message = request.POST.get("content")
+        image = request.FILES.get("image")
         Original_post = post.objects.get(id=post_id)
-        post.objects.create(user=request.user, text=message, tag=Original_post.tag, referenced_post=Original_post)
+        post.objects.create(user=request.user, text=message, tag=Original_post.tag, referenced_post=Original_post, image=image)

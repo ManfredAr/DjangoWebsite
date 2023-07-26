@@ -9,6 +9,7 @@ class post(models.Model):
     time = models.DateTimeField(auto_now_add=True)
     likes = models.IntegerField(default=0)
     tag = models.CharField(max_length=40, default="news", null=False)
+    image = models.ImageField(upload_to='post-images/', null=True, blank=True)
     referenced_post = models.ForeignKey('self', null=True, blank=True, on_delete=models.CASCADE)
 
 
