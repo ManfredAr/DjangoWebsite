@@ -8,18 +8,21 @@ html, body {
 }
 
 .container {
-    width: 30%;
+    width: 600px;
     background-color: #000000;
-    display: flex;
     justify-content: center;
     min-height: 100%;
+    display: flex;
+    flex: 1;
 }
 
 .sidebar {
-    width: 20vh;
-    position: fixed;
-    left: 23%;
-    top: 5%;
+  width: 20vh; 
+  position: fixed;
+  top: 5%;
+  bottom: 0;
+  left: 20%;
+  flex: 0 0 200px;
 }
 
 .sidebar a {
@@ -40,4 +43,30 @@ html, body {
     color: hsl(0, 0%, 100%);
     box-shadow: rgb(93 24 220) 0px 7px 29px 0px;
     text-decoration: none;
+}
+
+
+
+@media (max-width: 1600px) {
+    .sidebar {
+        left: 200px;
+        top: 5%;
+        width: 190px;
+    }
+}
+
+@media (max-width: 1300px) {
+    .sidebar {
+        left: 100px; 
+        top: 5%; 
+        width: 190px; 
+    }
+}
+
+@media (max-width: 1100px) {
+    .sidebar {
+        left: 0px; 
+        top: 5%; 
+        width: 20%;
+    }
 }

@@ -11,7 +11,6 @@
     background: #1abc9c;
     color: white;
     font-size: 30px;
-    margin-top: 5px;
     height: 300px;
 }
 
@@ -22,7 +21,7 @@
     margin-bottom: 3px;
     border-width: thin;
     padding: 10px;
-    display: flex; 
+    display: flex;
     align-items: flex-start;
     position: relative;
 }
@@ -72,6 +71,17 @@ a:hover {
 
 .press button, .press p {
     display: inline;
+}
+
+.comment button, .comment p {
+    display: inline;
+    color: white;
+}
+
+.comment button {
+    border: none;
+    color: white;
+    background: none;
 }
 
 button.disabled {
@@ -139,4 +149,43 @@ button.disabled {
 
 .con p {
     margin: 0;
+}
+
+.options {
+    display: flex;
+}
+
+.comment, .view {
+    margin-left: 30px;
+}
+
+.likes, .comment {
+    width: 50px
+}
+
+.popup {
+    top: 0; 
+    left: 0;
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    background: rgba(85, 85, 85, 0.9); 
+    display: flex;
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+}
+
+.popup-content {
+    background: white;
+    height: 50%;
+    width: 30%;
+    position: absolute;
+    top: 30%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 10px;
+}
+
+.click {
+    color: white;
 }

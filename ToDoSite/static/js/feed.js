@@ -6,15 +6,15 @@ document.addEventListener('DOMContentLoaded', function() {
         event.preventDefault();
         
         var formId = form.id;
-        // Get the form ID from the dataset attribute
+
         var formId = form.dataset.formId;
 
-        // Get the clicked button's ID from the event object
+
         var buttonId = event.submitter.id;
         
         var likeButton = document.getElementById(buttonId);
         if (likeButton.classList.contains('disabled')) {
-          return; // Prevent submitting the form again if the button is already disabled
+          return; 
         }
 
         likeButton.classList.add('disabled');
@@ -24,8 +24,8 @@ document.addEventListener('DOMContentLoaded', function() {
         
         // Make an AJAX request
         const xhr = new XMLHttpRequest();
-        xhr.open('POST', '/post/input-likes'); // Replace with your Django view URL
-        xhr.setRequestHeader('X-CSRFToken', formData.get('csrfmiddlewaretoken')); // Include the CSRF token
+        xhr.open('POST', '/post/input-likes'); 
+        xhr.setRequestHeader('X-CSRFToken', formData.get('csrfmiddlewaretoken'));
         xhr.onreadystatechange = function() {
         if (xhr.readyState === XMLHttpRequest.DONE) {
             if (xhr.status === 200) {
@@ -52,4 +52,69 @@ document.addEventListener('DOMContentLoaded', function() {
   
   
   
+  document.addEventListener('DOMContentLoaded', function() {
+    var commentButtons = document.querySelectorAll('.comment-button');
+    var popup = document.getElementsByClassName("popup")[0];
+
+    commentButtons.forEach(function(button) {
+        button.addEventListener('click', function() {
+            var postId = button.dataset.postId;
+            var postContent = document.getElementById("p" + postId).innerHTML;
+            document.getElementById('originID').innerHTML = postId;
+            var popupContent = document.getElementById("PrevPost");
+            popupContent.innerText = postContent;
+
+            popup.style.display = 'block';
+        });
+    });
+});
+
+
+
+function remove() {
+  document.getElementById("popup").style.display = "none";
+  document.getElementById('error').style.display = 'none';
+}
+
+
+document.addEventListener('DOMContentLoaded', function() {
+  document.getElementById('commentForm').addEventListener('submit', function(event) {
+    event.preventDefault();
+
+    var comment = document.getElementById('submitButton');
+    if (comment.classList.contains('disabled')) {
+      return; 
+    }
+
+    comment.classList.add('disabled');
+
+    message = document.getElementById('postContent').value
+    if (message == "") {
+      document.getElementById('error').style.display = 'block';
+    } else {
+      const formData = new FormData(this);
+      postId = document.getElementById('originID').innerHTML;
+      formData.append('post_id', postId);
+  
+      const xhr = new XMLHttpRequest();
+      xhr.open('POST', '/post/create-comment'); 
+      xhr.setRequestHeader('X-CSRFToken', formData.get('csrfmiddlewaretoken'));
+      xhr.onreadystatechange = function() {
+      if (xhr.readyState === XMLHttpRequest.DONE) {
+          if (xhr.status === 200) {
+            popup.style.display = 'none';
+            comment.classList.remove('disabled');
+            location.reload();
+          } else {
+            console.error('Request failed:', xhr.status);
+            comment.classList.remove('disabled');
+          }
+      }
+      };
+      xhr.send(formData);
+    }
+    comment.classList.remove('disabled');
+  })
+});
+
 

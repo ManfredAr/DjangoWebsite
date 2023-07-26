@@ -7,58 +7,11 @@
   margin-right: 3px;
 }
 
-.header{
-  padding: 20px;
-  background: #1a85bc;
+.header {
+  background: #1abc9c;
   color: white;
   font-size: 30px;
-  max-width: 100%;
-}
-
-.separator {
-  width: 30px; /* Adjust the width as per your desired separation */
-}
-
-.container .header {
-  width: 100%;
-}
-
-.posts {
-    color: white;
-}
-
-.info {
-  display: flex;
-}
-
-.followers, .following {
-  display: inline-block;
-}
-
-.following {
-  margin-left:10px;
-}
-
-.top {
-  display: flex;
-  justify-content: space-between;
-
-}
-
-.heading h1 {
-  float: left;
-}
-
-.follow button {
-  float: right;
-}
-
-.light {
-  color: rgb(81, 81, 81);
-}
-
-.info {
-  font-size: 20px;
+  height: 250px;
 }
 
 .box {
@@ -68,26 +21,67 @@
   margin-bottom: 3px;
   border-width: thin;
   padding: 10px;
-  display: flex; 
+  display: flex;
   align-items: flex-start;
   position: relative;
 }
 
-.name a, .con, .time{
-  color: white;
+.lines {
+  border-top-style: solid;
+  border-width: thin;
+  border-spacing: 10px;
+  border-color: rgb(118, 118, 118)
 }
 
-.name, .time {
+.name {
   display: inline;
 }
 
+.name a {
+  width: 5%;
+  font-weight: bold;
+  color: white
+}
+
+.header a {
+  color: azure;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+a:hover {
+  color: azure;
+}
+
 .time {
-  float: right;
+  position: absolute; /* Position the time element absolutely */
+  top: 10px; /* Distance from the top of the .box container */
+  right: 10px;
   color: rgb(110, 118, 125);
+}
+
+.con, h2 {
+  font-family: Arial, Helvetica, sans-serif;
+  color: white;
 }
 
 .likes {
   color: white;
+}
+
+.press button, .press p {
+  display: inline;
+}
+
+.comment button, .comment p {
+  display: inline;
+  color: white;
+}
+
+.comment button {
+  border: none;
+  color: white;
+  background: none;
 }
 
 button.disabled {
@@ -96,57 +90,51 @@ button.disabled {
   pointer-events: none; /* Disable pointer events on the button */
 }
 
-.name a {
-  width: 5%;
-  font-weight: bold;
-}
-
 .likes button {
   background: none;
   border: none
 }
 
-.press button, .press p {
-  display: inline;
-}
-
-
 .header button {
-    border-radius: 12px;
-    width: 100px;
-    height: 35px;
-    font-size: 15px;
-    background: none;
+  border-radius: 12px;
+  width: 100px;
+  height: 35px;
+  font-size: 15px;
+  background: none;
 }
 
 .header h1, .header button {
-    display: inline;
+  display: inline;
+}
+
+.header h1, p {
+  margin-left: 5%;
 }
 
 .header button {
-    float: right;
-    margin-right: 10px;
-    margin-top: 20px;
+  float: right;
+  margin-right: 10px;
+  margin-top: 20px;
 }
 
 .header img {
-    margin-top: 2%;
-    clip-path: circle();
-    width: 30%
+  margin-top: 2%;
+  clip-path: circle();
+  width: 30%
 }
 
 .header p {
-    font-size: 15px
+  font-size: 15px
 }
 
 .header a {
-    font-weight: lighter;
-    font-size: 15px;
-    color: white;
+  font-weight: lighter;
+  margin-left: 5%;
+  font-size: 15px;
 }
 
 .header a::hover {
-    text-decoration: underline;
+  text-decoration: underline;
 }
 
 .content img {
@@ -157,4 +145,47 @@ button.disabled {
 
 .place {
   margin-left:10px
+}
+
+.con p {
+  margin: 0;
+}
+
+.options {
+  display: flex;
+}
+
+.comment, .view {
+  margin-left: 30px;
+}
+
+.likes, .comment {
+  width: 50px
+}
+
+.popup {
+  top: 0; 
+  left: 0;
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  background: rgba(85, 85, 85, 0.9); 
+  display: flex;
+  justify-content: center; /* Center horizontally */
+  align-items: center; /* Center vertically */
+}
+
+.popup-content {
+  background: white;
+  height: 50%;
+  width: 30%;
+  position: absolute;
+  top: 30%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 10px;
+}
+
+.click {
+    color: white;
 }
