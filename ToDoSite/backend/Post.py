@@ -3,6 +3,8 @@ from post.models import post, like
 from account.models import follower, Profile
 from django.db.models import Subquery, OuterRef, Exists, Count, F
 from post.forms import PostForm
+import os
+import uuid
 
 
 class Post:
@@ -15,6 +17,7 @@ class Post:
                 text = form.cleaned_data['text']
                 tag = form.cleaned_data['tag']
                 image = form.cleaned_data['image']
+                image.name = Post.get_unique_filename(image.name)
                 text = text.replace('\n', '<br>')
                 tag = tag.replace(" ", "").lower()
                 newpost = post(user=request.user, text=text, tag=tag, image=image)
@@ -22,6 +25,19 @@ class Post:
                 return redirect('/home/')
         form = PostForm()
         return render(request, 'post/post.html', {'form':form})
+    
+
+    def get_unique_filename(filename):
+        # Generate a random unique string using UUID (Universally Unique Identifier)
+        unique_name = str(uuid.uuid4())
+
+        # Get the file extension from the original filename
+        ext = os.path.splitext(filename)[1]
+
+        # Combine the unique string and the file extension to create the new filename
+        new_filename = unique_name + ext
+        return new_filename
+
 
     @staticmethod
     def getFeed(request):

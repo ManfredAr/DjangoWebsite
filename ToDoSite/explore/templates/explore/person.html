@@ -57,11 +57,17 @@
                         posted: {{ post.time|timesince }}
                     </div> <br>
                     <div class="con">
-                        <p id="p{{post.id}}"> {{ post.text|safe }} </p>
+                        <div class="posCon">
+                            <p id="p{{post.id}}"> {{ post.text|safe }} </p>
+                        </div>
                         {% if post.image %}
-                        <img src="/media/{{ post.image }}" alt="Profile Image" width="100" height="100">
+                        <div class="image-container">
+                            <img src="/media/{{ post.image }}" alt="Profile Image" class="scaled-image">
+                        </div>
                         {% endif %}
-                        <br/> <p> #{{ post.tag }} </p>
+                        <div class="tag-container">
+                            <p> #{{ post.tag }} </p>
+                        </div>
                     </div>
                     <div class="options">
                         <div class="likes">
