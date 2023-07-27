@@ -17,7 +17,7 @@ class Post:
                 text = form.cleaned_data['text']
                 tag = form.cleaned_data['tag']
                 image = form.cleaned_data['image']
-                image.name = Post.get_unique_filename(image.name)
+                image.image = Post.get_unique_filename(image)
                 text = text.replace('\n', '<br>')
                 tag = tag.replace(" ", "").lower()
                 newpost = post(user=request.user, text=text, tag=tag, image=image)
