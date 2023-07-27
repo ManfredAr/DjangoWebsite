@@ -1,0 +1,18 @@
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 90vh;
+}
+
+body {
+    background-image: linear-gradient(to right, rgb(185, 83, 206) , rgb(126, 255, 87));
+}
+
+.content {
+    text-align: center;
+}
+
+#box1 {
+    background-image: linear-gradient(to right, rgb(185, 83, 206) , rgb(126, 255, 87));
+}

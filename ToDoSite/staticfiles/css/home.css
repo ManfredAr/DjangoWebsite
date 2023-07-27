@@ -1,0 +1,72 @@
+html, body {
+    height: 100%;
+    margin: 0;
+    background-image: linear-gradient(rgba(136, 1, 138, 0.768), rgb(0, 28, 152));
+    background-repeat: no-repeat;
+    background-attachment: fixed; /* Keep the background fixed while scrolling */
+    min-height: 100vh; /* Set the minimum height of the body to 100% of the viewport height */
+}
+
+.container {
+    width: 600px;
+    background-color: #000000;
+    justify-content: center;
+    min-height: 100%;
+    display: flex;
+    flex: 1;
+}
+
+.sidebar {
+  width: 20vh; 
+  position: fixed;
+  top: 5%;
+  bottom: 0;
+  left: 20%;
+  flex: 0 0 200px;
+}
+
+.sidebar a {
+    color: #ffffff;
+    padding: 17px 40px;
+    border-radius: 50px;
+    border: 0;
+    box-shadow: rgb(0 0 0 / 5%) 0 0 8px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    font-size: 15px;
+    transition: all .5s ease;
+    display: block;
+}
+   
+.sidebar a:hover {
+    background-color: hsl(261deg 80% 48%);
+    color: hsl(0, 0%, 100%);
+    box-shadow: rgb(93 24 220) 0px 7px 29px 0px;
+    text-decoration: none;
+}
+
+
+
+@media (max-width: 1600px) {
+    .sidebar {
+        left: 200px;
+        top: 5%;
+        width: 190px;
+    }
+}
+
+@media (max-width: 1300px) {
+    .sidebar {
+        left: 100px; 
+        top: 5%; 
+        width: 190px; 
+    }
+}
+
+@media (max-width: 1100px) {
+    .sidebar {
+        left: 0px; 
+        top: 5%; 
+        width: 20%;
+    }
+}

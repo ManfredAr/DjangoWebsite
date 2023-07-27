@@ -1,0 +1,48 @@
+.content h1 {
+    color: white;
+}
+
+.category button {
+    background: none;
+}
+
+.category button{
+    color: white;
+    margin-top: 10px;
+    font-size: 20px;
+    border-radius: 5px;
+    border-color: white;
+    border-style: solid;
+    border-width: 1px
+}
+
+.category button {
+    width:100%;
+}
+
+a {
+    color:white;
+}
+
+.main {
+    display: Flex;
+    justify-content: center
+}
+
+.searchbox {
+    display: inline;
+}
+
+input {
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.button {
+    display: inline;
+    background-color: aqua;
+}
+
+.error {
+    text-align: center;
+}
