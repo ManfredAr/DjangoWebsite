@@ -80,7 +80,7 @@ function remove() {
 document.addEventListener('DOMContentLoaded', function() {
   document.getElementById('commentForm').addEventListener('submit', function(event) {
     event.preventDefault();
-
+    console.log("good start");
     var comment = document.getElementById('submitButton');
     if (comment.classList.contains('disabled')) {
       return; 
@@ -91,30 +91,54 @@ document.addEventListener('DOMContentLoaded', function() {
     message = document.getElementById('postContent').value
     if (message == "") {
       document.getElementById('error').style.display = 'block';
-    } else {
-      const formData = new FormData(this);
-      postId = document.getElementById('originID').innerHTML;
-      formData.append('post_id', postId);
-  
-      const xhr = new XMLHttpRequest();
-      xhr.open('POST', '/post/create-comment'); 
-      xhr.setRequestHeader('X-CSRFToken', formData.get('csrfmiddlewaretoken'));
-      xhr.onreadystatechange = function() {
-      if (xhr.readyState === XMLHttpRequest.DONE) {
-          if (xhr.status === 200) {
-            popup.style.display = 'none';
-            comment.classList.remove('disabled');
-            location.reload();
-          } else {
-            console.error('Request failed:', xhr.status);
-            comment.classList.remove('disabled');
-          }
+      comment.classList.remove('disabled');
+      console.log("what?!");
+      return;
+    } 
+
+    const imageInput = document.getElementById('id_image');
+    const imageFile = imageInput.files[0];
+
+    if (imageFile) {
+      const maxSize = 5 * 1024 * 1024;
+      if (imageFile.size > maxSize) {
+        alert('Please select an image smaller than 5MB.');
+        comment.classList.remove('disabled');
+        console.log("not enough space");
+        return;
       }
-      };
-      xhr.send(formData);
+
+      const allowedTypes = ['image/jpeg', 'image/png', 'image/gif'];
+      if (!allowedTypes.includes(imageFile.type)) {
+        alert('Please select a valid image (JPEG, PNG, or GIF).');
+        comment.classList.remove('disabled');
+        console.log("incorrect type");
+        return; 
+      }
     }
+
+    const formData = new FormData(this);
+    postId = document.getElementById('originID').innerHTML;
+    formData.append('post_id', postId);
+  
+    const xhr = new XMLHttpRequest();
+    xhr.open('POST', '/post/create-comment'); 
+    xhr.setRequestHeader('X-CSRFToken', formData.get('csrfmiddlewaretoken'));
+    xhr.onreadystatechange = function() {
+      if (xhr.readyState === XMLHttpRequest.DONE) {
+        if (xhr.status === 200) {
+          popup.style.display = 'none';
+          comment.classList.remove('disabled');
+          location.reload();
+        } else {
+          console.error('Request failed:', xhr.status);
+          comment.classList.remove('disabled');
+        }
+      }
+    };
+    xhr.send(formData);
     comment.classList.remove('disabled');
-  })
+  });
 });
 
 

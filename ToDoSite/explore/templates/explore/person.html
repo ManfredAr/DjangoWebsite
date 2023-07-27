@@ -57,8 +57,17 @@
                         posted: {{ post.time|timesince }}
                     </div> <br>
                     <div class="con">
-                        <p id="p{{post.id}}"> {{ post.text|safe }} </p>
-                        <br/> <p> #{{ post.tag }} </p>
+                        <div class="posCon">
+                            <p id="p{{post.id}}"> {{ post.text|safe }} </p>
+                        </div>
+                        {% if post.image %}
+                        <div class="image-container">
+                            <img src="/media/{{ post.image }}" alt="Profile Image" class="scaled-image">
+                        </div>
+                        {% endif %}
+                        <div class="tag-container">
+                            <p> #{{ post.tag }} </p>
+                        </div>
                     </div>
                     <div class="options">
                         <div class="likes">
@@ -115,9 +124,13 @@
             <p id="PrevPost">  </p>
         </div>
         <h2>Comment</h2>
-        <form method="POST" id="commentForm">
+        <form method="POST" id="commentForm" enctype="multipart/form-data">
             {% csrf_token %}
             <textarea class="form-control" name="content" id="postContent" maxlength="300" rows="4" cols="7"></textarea> <br> <br>
+            <div class="form-group">
+                <label for="id_image">Image:</label> <br/>
+                <input type="file" name="image" id="id_image">
+            </div>
             <div style="text-align: center;">
                 <button type="submit" id="submitButton"> Post </button>
             </div>

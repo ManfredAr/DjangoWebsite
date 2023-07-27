@@ -15,16 +15,20 @@
 {% if user.is_authenticated %}
 <div class="main">
     <h1 style="color: white;"> Create a post </h1> <br/>
-    <form method="POST" onsubmit="return validateForm()">
+    <form method="POST" enctype="multipart/form-data">
         {% csrf_token %}
-        <h2>Post</h2>
-        <textarea class="form-control" name="content" id="postContent" maxlength="300" rows="4" cols="7"></textarea> <br> <br>
-        <h2>Add a tag</h2>
-        <textarea class="form-control" name="tag" id="tagContent" maxlength="50" rows="1" cols="7"></textarea> <br> <br>
+        <label> Post: </label>
+        <textarea name="{{ form.text.name }}" rows="5" cols="30" style="width: 100%;">Enter a message</textarea>
 
-        <div style="text-align: center;">
-            <button type="submit" id="submitButton"> Post </button>
+        <div class="form-group">
+            <label for="{{ form.tag.id_for_label }}">Tag:</label> <br/>
+            {{ form.tag }}
         </div>
+        <div class="form-group">
+            <label for="{{ form.image.id_for_label }}">Image:</label> <br/>
+            {{ form.image }}
+        </div>
+        <button type="submit">Submit</button>
     </form>
     <div id="error" style="display: none; text-align: center; color: red;">
         <p> There was an error make sure to not leave the post or tag empty </p>

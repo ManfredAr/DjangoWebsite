@@ -2,6 +2,9 @@ from django.shortcuts import render, redirect
 from post.models import post, like
 from account.models import follower, Profile
 from django.db.models import Subquery, OuterRef, Exists, Count, F
+from post.forms import PostForm
+import os
+import uuid
 
 
 class Post:
@@ -9,14 +12,32 @@ class Post:
     @staticmethod
     def makePost(request):
         if request.method == "POST":
-            content = request.POST['content']
-            content = content.replace('\n', '<br>')
-            tag = request.POST['tag']
-            tag = tag.replace(" ", "").lower()
-            newpost = post(user=request.user, text=content, tag=tag)
-            newpost.save()
-            return redirect('/home/')
-        return render(request, 'post/post.html', {})
+            form = PostForm(request.POST, request.FILES)
+            if form.is_valid():
+                text = form.cleaned_data['text']
+                tag = form.cleaned_data['tag']
+                image = form.cleaned_data['image']
+                image.image = Post.get_unique_filename(image)
+                text = text.replace('\n', '<br>')
+                tag = tag.replace(" ", "").lower()
+                newpost = post(user=request.user, text=text, tag=tag, image=image)
+                newpost.save()
+                return redirect('/home/')
+        form = PostForm()
+        return render(request, 'post/post.html', {'form':form})
+    
+
+    def get_unique_filename(filename):
+        # Generate a random unique string using UUID (Universally Unique Identifier)
+        unique_name = str(uuid.uuid4())
+
+        # Get the file extension from the original filename
+        ext = os.path.splitext(filename)[1]
+
+        # Combine the unique string and the file extension to create the new filename
+        new_filename = unique_name + ext
+        return new_filename
+
 
     @staticmethod
     def getFeed(request):
