@@ -1,0 +1,155 @@
+.content {
+    width: 100%;
+    height: 100%;
+    margin-bottom: 20px;
+    top: 5%;
+    margin-left: 3px;
+    margin-right: 3px;
+}
+
+
+.box {
+    border-style: solid;
+    color: rgb(98, 94, 89);
+    border-radius: 10px;
+    margin-bottom: 3px;
+    border-width: thin;
+    padding: 10px;
+    display: flex; 
+    align-items: flex-start;
+    position: relative;
+}
+
+.name a, .con, .time{
+    color: white;
+}
+
+.name, .time {
+    display: inline;
+}
+
+.time {
+    position: absolute; /* Position the time element absolutely */
+    top: 10px; /* Distance from the top of the .box container */
+    right: 10px;
+    color: rgb(110, 118, 125);
+}
+
+.likes {
+    color: white;
+}
+
+button.disabled {
+    opacity: 0.6; /* Reduced opacity to indicate disabled state */
+    cursor: not-allowed; /* Show not-allowed cursor on hover */
+    pointer-events: none; /* Disable pointer events on the button */
+}
+
+.name a {
+    width: 5%;
+    font-weight: bold;
+}
+
+.likes button {
+    background: none;
+    border: none
+}
+
+.press button, .press p {
+    display: inline;
+}
+
+.content img {
+    height: 40px;
+    width: 40px;
+    float: left;
+    
+}
+
+.image {
+  margin-right: 10px;
+}
+
+.title {
+    display: flex;
+    justify-content: space-between;
+}
+
+.comment button {
+    background: none;
+    color: white;
+    border: none;
+}
+
+.options {
+    display: flex;
+}
+
+.like {
+    display: flex;
+}
+
+.comment {
+    margin-left: 30px;
+}
+
+.comment, .comment p {
+    color: white;
+    display: inline;
+}
+
+
+.popup {
+    top: 0; 
+    left: 0;
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    background: rgba(85, 85, 85, 0.9); 
+    display: flex;
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+}
+
+.popup-content {
+    background: white;
+    height: 50%;
+    width: 30%;
+    position: absolute;
+    top: 30%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 10px;
+}
+
+.view {
+    margin-left: 40px;
+}
+
+.view a {
+    color: white;
+    text-decoration: none;
+}
+
+
+.con {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 10px; 
+}
+
+.posCon {
+    margin-bottom: 10px; 
+}
+
+.image-container {
+    display: flex;
+    margin-bottom: 10px;
+}
+
+.image-container img {
+    max-width: 500px; 
+    max-height: 440px; 
+    width: auto; 
+    height: auto; 
+  }
