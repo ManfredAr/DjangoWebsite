@@ -1,6 +1,5 @@
 from django.shortcuts import render, redirect
 from account.models import Profile
-from account.forms import ChangeForm
 from account.models import follower
 from backend.Post import Post
 from django.contrib.auth.models import User
