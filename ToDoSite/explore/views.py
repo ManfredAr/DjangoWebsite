@@ -5,6 +5,8 @@ from backend.profiles import profiles
 from post.models import post
 from account.models import Profile
 from django.db.models import Subquery, OuterRef
+from account.models import follower
+from django.http import JsonResponse
 
 
 # Create your views here.
@@ -39,3 +41,15 @@ def following(request, username):
         return follows.following(request, username)
     else:
         return render(request, 'explore/following.html', {})
+    
+def checkFollow(request):
+    if request.method == "POST":
+        user_id = request.POST.get('person_id')
+        person = User.objects.get(id=user_id)
+        check = follower.objects.filter(follower=request.user, followee=person)
+        if check.exists():
+            follower.objects.filter(follower=request.user, followee=person).delete()
+        else:
+            follower.objects.create(follower=request.user, followee=person)
+
+        return JsonResponse({'status': 'success'})

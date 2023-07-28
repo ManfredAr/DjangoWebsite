@@ -44,16 +44,6 @@ class profiles:
             profile = Profile.objects.get(user=user_details)
         else:
             profile = Profile.objects.create(user_id=user_details.id, image="account-images/default.jpg", description="")
-        
-
-        if (request.method == "POST"):
-            choice = request.POST["choice"]
-            if (choice == "follow"):
-                follower.objects.create(follower=request.user, followee=user_details)
-            else:
-                follower_entry = follower.objects.filter(follower=request.user, followee=user_details)
-                if follower_entry:
-                    follower_entry.delete()
 
         is_following = follower.objects.filter(follower=request.user, followee=user_details).exists()
         return render(request, 'explore/person.html', {"profile":profile, "person": user_details, "posts": Posts, "follow": is_following, "followers":followers, "following":following})
