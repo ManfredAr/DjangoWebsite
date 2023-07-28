@@ -211,3 +211,7 @@ button.disabled {
     width: auto; 
     height: auto; 
   }
+
+h2 {
+    color: black;
+}

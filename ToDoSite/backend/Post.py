@@ -16,18 +16,19 @@ class Post:
             if form.is_valid():
                 text = form.cleaned_data['text']
                 tag = form.cleaned_data['tag']
-                image = form.cleaned_data['image']
-                image.image = Post.get_unique_filename(image)
+                #image = form.cleaned_data['image']
+                #image.image = Post.get_unique_filename(image)
                 text = text.replace('\n', '<br>')
                 tag = tag.replace(" ", "").lower()
-                newpost = post(user=request.user, text=text, tag=tag, image=image)
+                newpost = post(user=request.user, text=text, tag=tag)
+                #newpost = post(user=request.user, text=text, tag=tag, image=image)
                 newpost.save()
                 return redirect('/home/')
         form = PostForm()
         return render(request, 'post/post.html', {'form':form})
     
 
-    def get_unique_filename(filename):
+    #def get_unique_filename(filename):
         # Generate a random unique string using UUID (Universally Unique Identifier)
         unique_name = str(uuid.uuid4())
 

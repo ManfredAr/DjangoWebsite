@@ -1,4 +1,3 @@
-import os
 from django.shortcuts import render, redirect
 from account.models import Profile
 from account.forms import ChangeForm
@@ -23,28 +22,18 @@ class profiles:
     @staticmethod
     def changeProfile(request):
         if request.method == 'POST':
-            form = ChangeForm(request.POST, request.FILES)
-            if form.is_valid():
-                if Profile.objects.filter(user=request.user).exists():
-                    profile = Profile.objects.get(user=request.user)
-                    profile.image = form.cleaned_data['image']
-                    profile.description = form.cleaned_data['description']
-                    profile.save()
-                else:
-                    profile = form.save(commit=False)
-                    profile.user = request.user
-                    profile.save()
-
-                return redirect('/profile/')
+            profile = Profile.objects.get(user=request.user)
+            profile.image = request.POST.get("image_choice")
+            profile.description = request.POST.get('desc')
+            profile.save()
+            return redirect('/profile/')
         else:
-            if Profile.objects.filter(user=request.user).exists():
-                profile = Profile.objects.get(user=request.user)
-                form = ChangeForm(instance=profile)
-            else:
-                form = ChangeForm()
-            image_name = os.path.basename(profile.image.name) if profile and profile.image else None
-            return render(request, 'account/changeProfile.html', {'form': form, 'image_name': image_name})
-        return render(request, 'account/changeProfile.html', {'form': form, 'image_name': image_name})
+            profile = Profile.objects.get(user=request.user)
+            current_image = profile.image
+            current_desc = profile.description
+            options = ['1_image.jpg', 'image2.jpg', 'image3.jpg', 'image4.jpg', 'image5.png', 'default.jpg']
+            return render(request, 'account/changeProfile.html', {'desc': current_desc, 'img': current_image, 'options': options})
+
     
     @staticmethod
     def getPersonProfile(request, username):

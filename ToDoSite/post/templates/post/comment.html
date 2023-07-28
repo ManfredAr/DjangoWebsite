@@ -25,7 +25,7 @@ Your feed
     </div>
     <div class="box">
         <div class="image">
-            <img src="/media/{{ main.creator_profile_image }}" alt="Profile Image">
+            <img src="/static/profile_images/{{ main.creator_profile_image }}" alt="Profile Image">
         </div>
         <div class="place">
             <div class="name">
@@ -38,11 +38,13 @@ Your feed
                 <div class="posCon">
                     <p id="p{{main.id}}"> {{ main.text|safe }} </p>
                 </div>
-                {% if main.image %}
-                <div class="image-container">
-                    <img src="/media/{{ main.image }}" alt="Profile Image" class="scaled-image">
-                </div>
-                {% endif %}
+            <!--
+                        {% if post.image %}
+                        <div class="image-container">
+                            <img src="/media/{{ post.image }}" alt="Profile Image" class="scaled-image">
+                        </div>
+                        {% endif %}
+                        -->
                 <div class="tag-container">
                     <p> #{{ main.tag }} </p>
                 </div>
@@ -88,7 +90,7 @@ Your feed
     {% for post in comments %}
     <div class="box"> 
         <div class="image">
-            <img src="/media/{{ post.creator_profile_image }}" alt="Profile Image">
+            <img src="{{ post.creator_profile_image }}" alt="Profile Image">
         </div>
         <div class="place">
             <div class="name">
@@ -101,11 +103,13 @@ Your feed
                 <div class="posCon">
                     <p id="p{{post.id}}"> {{ post.text|safe }} </p>
                 </div>
-                {% if post.image %}
-                <div class="image-container">
-                    <img src="/media/{{ post.image }}" alt="Profile Image" class="scaled-image">
-                </div>
-                {% endif %}
+            <!--
+            {% if post.image %}
+            <div class="image-container">
+            <img src="/media/{{ post.image }}" alt="Profile Image" class="scaled-image">
+            </div>
+            {% endif %}
+            -->
                 <div class="tag-container">
                     <p> #{{ post.tag }} </p>
                 </div>
@@ -167,8 +171,12 @@ Your feed
         <form method="POST" id="commentForm">
             {% csrf_token %}
             <textarea class="form-control" name="content" id="postContent" maxlength="300" rows="4" cols="7"></textarea> <br> <br>
-            <label for="id_image">Image:</label> <br/>
-            <input type="file" name="image" id="id_image">
+            <!--
+            <div class="form-group">
+                <label for="id_image">Image:</label> <br/>
+                <input type="file" name="image" id="id_image">
+            </div>
+            -->
             <div style="text-align: center;">
                 <button type="submit" id="submitButton"> Post </button>
             </div>

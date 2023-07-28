@@ -96,6 +96,7 @@ document.addEventListener('DOMContentLoaded', function() {
       return;
     } 
 
+    /*
     const imageInput = document.getElementById('id_image');
     const imageFile = imageInput.files[0];
 
@@ -117,6 +118,7 @@ document.addEventListener('DOMContentLoaded', function() {
       }
     }
 
+    */
     const formData = new FormData(this);
     postId = document.getElementById('originID').innerHTML;
     formData.append('post_id', postId);

@@ -4,7 +4,8 @@ from .models import post
 class PostForm(forms.ModelForm):
     class Meta:
         model = post
-        fields = ['text', 'tag', 'image']
+        fields = ['text', 'tag']
+        #fields = ['text', 'tag', 'image']
 
         
         widgets = {

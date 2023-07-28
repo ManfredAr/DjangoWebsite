@@ -16,7 +16,6 @@ class follows:
         follower_users = [follower.followee for follower in followers]
         profiles = Profile.objects.filter(user__in=follower_users)
         following = followers.annotate(creator_profile_image=Subquery(profiles.filter(user=OuterRef('followee')).values('image')[:1]))
-        print(following[0].creator_profile_image)
         return render(request, 'explore/following.html', {"profile":profile, "following":following})
     
 
@@ -26,5 +25,4 @@ class follows:
         follower_users = [follower.follower for follower in followers]
         profiles = Profile.objects.filter(user__in=follower_users)
         followers = followers.annotate(creator_profile_image=Subquery(profiles.filter(user=OuterRef('follower')).values('image')[:1]))
-        print(followers[0].creator_profile_image)
         return render(request, 'explore/followers.html', {"profile": profile, "followers": followers})
