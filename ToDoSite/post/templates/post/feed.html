@@ -26,7 +26,7 @@ Your feed
     {% for post in posts %}
     <div class="box">
         <div class="image">
-            <img src="/static/profile_images/{{ post.creator_profile_image }}" alt="Profile Image" width="50" height="50">
+            <img src="{{ post.creator_profile_image }}" alt="Profile Image" width="50" height="50">
         </div> 
         <div class="place">
             {% if post.referenced_post_pk %}

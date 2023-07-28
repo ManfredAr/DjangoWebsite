@@ -23,10 +23,19 @@ def explore(request):
     return render(request, 'explore/explore.html', {})
 
 def person(request, username):
-    return profiles.getPersonProfile(request, username)
+    if request.user.is_authenticated:
+        return profiles.getPersonProfile(request, username)
+    else:
+        return render(request, 'account/profile.html', {}) 
 
 def followers(request, username):
-    return follows.followers(request, username)
+    if request.user.is_authenticated:
+        return follows.followers(request, username)
+    else:
+        return render(request, 'explore/followers.html', {})
 
 def following(request, username):
-    return follows.following(request, username)
+    if request.user.is_authenticated:
+        return follows.following(request, username)
+    else:
+        return render(request, 'explore/following.html', {})

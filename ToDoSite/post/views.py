@@ -8,8 +8,11 @@ def user_post(request):
     return Post.makePost(request)
 
 def feed(request):
-    posts = Post.getFeed(request)
-    return render(request, 'post/feed.html', {"posts": posts})
+    if request.user.is_authenticated:
+        posts = Post.getFeed(request)
+        return render(request, 'post/feed.html', {"posts": posts})
+    else: 
+        return render(request, 'post/feed.html', {})
 
 def likes(request):
     return userLikes.userLike(request)
@@ -23,7 +26,10 @@ def create_comment(request):
 
 
 def comments(request, post_id):
-    comments = comment.getComments(request, post_id)
-    main = comments.last()
-    comments = comments.exclude(id=main.id)
-    return render(request, 'post/comment.html', {'main': main, 'comments':comments})
+    if request.user.is_authenticated:
+        comments = comment.getComments(request, post_id)
+        main = comments.last()
+        comments = comments.exclude(id=main.id)
+        return render(request, 'post/comment.html', {'main': main, 'comments':comments})
+    else:
+        return render(request, 'post/comment.html', {})

@@ -28,6 +28,9 @@ Explore
                 </div>
             </form>
         </div>
+        <div class="info">
+            <p>If you want to search for a user simply enter the username. For tags start the search with a #.</p>
+        </div>
         <div class="results">
             <div class="tags">
                 {% if expect_Tag %}
@@ -37,11 +40,11 @@ Explore
                             <a href="/topic/{{tag}}"> {{ tag }} </a>
                         </div>
                         {% endfor %}
+                    {% else %}
+                        <div class="t">
+                            <p>No results for search</p>
+                        </div>
                     {% endif %}
-                {% else %}
-                    <div class="t">
-                        <p>No results for search</p>
-                    </div>
                 {%endif%}
             </div>      
             <div class="users">
@@ -62,11 +65,11 @@ Explore
                                 </div>
                             </div>
                         {% endfor %}
+                    {% else %}
+                        <div class="t">
+                            <p>No results for search</p>
+                        </div>
                     {% endif %}
-                {% else %}
-                    <div class="u">
-                        <p>No results for search</p>
-                    </div>
                 {% endif %}
             </div>
         </div>
