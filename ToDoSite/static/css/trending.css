@@ -46,3 +46,7 @@ input {
 .error {
     text-align: center;
 }
+
+.main button {
+    border: none;
+}
