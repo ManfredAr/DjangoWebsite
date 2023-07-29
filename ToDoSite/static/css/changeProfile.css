@@ -7,3 +7,28 @@
     font-size: 16px;
     color: #333;
 }
+
+.image-options {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.image-thumbnail {
+    width: 100px;
+    height: 100px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.image-option input[type="radio"]:checked + .image-thumbnail {
+    border: 2px solid blue;
+}
+
+.current-image {
+    width: 100px;
+    height: 100px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}

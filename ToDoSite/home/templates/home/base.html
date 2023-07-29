@@ -30,7 +30,22 @@
         <a href="/logout">Logout</a> <br/>
         <!-- Add more links as needed -->
     </div>
-    {% block content %} {% endblock %}
+
+    {% if user.is_authenticated %}
+      {% block content %} {% endblock %}
+    {% else %}
+      <div class="unauthorised">
+        <p>To view any content from the website please sign in or create a new account.</p>
+        <div class="login">
+          <p> If you have an account please login. </p>
+          <a href="/login/">Login</a>
+        </div>
+        <div class="register">
+          <p>If you do not have an account create a new one.</p>
+          <a href="/register/">Register</a>
+        </div>
+      </div>
+    {% endif %}
   </div>
 
   {% block popup %} {% endblock %}

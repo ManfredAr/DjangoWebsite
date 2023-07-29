@@ -21,18 +21,34 @@
         <h1> Change your profile </h1> <br/>
     </div>
 
-    <form method="post" enctype="multipart/form-data">
+    <form method="post">
         {% csrf_token %}
         <div class="form-group">
-            {{ form.image.label_tag }}
-            {{ form.image }}
+            <h2>Current image</h2>
+            <img src="{{ img }}" alt="Profile Image" class="current-image">
         </div>
-        <br/>
+    
+        <div class="choice">
+            <div class="form-group image-options">
+                <div>
+                    <h2>Choose a new image:</h2> <br/>
+                </div>
+                <div>
+                    {% for name in options %}
+                    <label class="image-option">
+                        <input type="radio" id="{{ name }}" name="image_choice" value="{% static 'profile_images/' %}{{ name }}">
+                        <img src="{% static 'profile_images/' %}{{ name }}" alt="Image 1" class="image-thumbnail">
+                    </label>
+                    {% endfor %}  
+                </div>
+            </div>
+        </div>
+        <br>
         <div class="form-group">
-            {{ form.description.label_tag }}
-            <textarea class="form-control" name="{{ form.description.name }}" rows="4">{{ form.description.value }}</textarea>
+            <textarea class="form-control" name="{{ form.description.name }}" rows="4">{{ desc }}</textarea>
         </div>
-        <button type="submit">Save Profile</button>
+        <button type="submit" class="btn btn-success">Save Profile</button>
     </form>
+    
 </div>
 {% endblock %}

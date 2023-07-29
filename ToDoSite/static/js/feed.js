@@ -80,7 +80,6 @@ function remove() {
 document.addEventListener('DOMContentLoaded', function() {
   document.getElementById('commentForm').addEventListener('submit', function(event) {
     event.preventDefault();
-    console.log("good start");
     var comment = document.getElementById('submitButton');
     if (comment.classList.contains('disabled')) {
       return; 
@@ -92,10 +91,10 @@ document.addEventListener('DOMContentLoaded', function() {
     if (message == "") {
       document.getElementById('error').style.display = 'block';
       comment.classList.remove('disabled');
-      console.log("what?!");
       return;
     } 
 
+    /*
     const imageInput = document.getElementById('id_image');
     const imageFile = imageInput.files[0];
 
@@ -117,6 +116,7 @@ document.addEventListener('DOMContentLoaded', function() {
       }
     }
 
+    */
     const formData = new FormData(this);
     postId = document.getElementById('originID').innerHTML;
     formData.append('post_id', postId);
@@ -140,5 +140,3 @@ document.addEventListener('DOMContentLoaded', function() {
     comment.classList.remove('disabled');
   });
 });
-
-

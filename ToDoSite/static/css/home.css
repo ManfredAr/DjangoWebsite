@@ -70,3 +70,9 @@ html, body {
         width: 20%;
     }
 }
+
+.unauthorised {
+    margin-top:50px;
+    color: white;
+    text-align: center
+  }
