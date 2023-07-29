@@ -1,0 +1,26 @@
+.popup-content {
+    background-color: black;
+    color: white;
+}
+
+.popup-content button {
+    border: none;
+    border-radius: 5px;
+}
+
+.post {
+    border-color: #828282;
+    border-style: solid;
+    border-width: thin;
+    padding: 5px;
+    margin-bottom: 20px;
+}
+
+.post p {
+    margin: 0;
+}
+
+.close {
+    background-color: white;
+    width: 20px;
+}

@@ -13,6 +13,7 @@ Your feed
 
 {% block style %}
 <link rel="stylesheet" type="text/css" media="screen" href="{%static 'css/feed.css'%}">
+<link rel="stylesheet" type="text/css" media="screen" href="{%static 'css/popup.css'%}">
 <script src="{% static 'js/feed.js' %}"></script>
 {% endblock %}
 
@@ -157,18 +158,19 @@ Your feed
 
 {% block popup %}
 <div class="popup" id="popup" style="display: none;">
-    <div class="close">
-        <button type="button" onclick="remove()">
-            <i class="fa fa-close"></i>
-        </button> 
-    </div>
     <div id="originID" style="visibility: hidden;"> </div>
     <div class="popup-content">
+        <div class="close">
+            <button class="close" type="button" onclick="remove()">
+                <i class="fa fa-close"></i>
+            </button> 
+        </div>
+        <h2>Post</h2>
         <div class="post">
             <p id="PrevPost">  </p>
         </div>
         <h2>Comment</h2>
-        <form method="POST" id="commentForm">
+        <form method="POST" id="commentForm" enctype="multipart/form-data">
             {% csrf_token %}
             <textarea class="form-control" name="content" id="postContent" maxlength="300" rows="4" cols="7"></textarea> <br> <br>
             <!--

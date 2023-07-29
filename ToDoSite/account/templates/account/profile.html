@@ -13,6 +13,7 @@
 
 {% block style %}
 <link rel="stylesheet" type="text/css" media="screen" href="{%static 'css/profile.css'%}">
+<link rel="stylesheet" type="text/css" media="screen" href="{%static 'css/popup.css'%}">
 <script src="{% static 'js/feed.js' %}"></script>
 {% endblock %}
 
@@ -104,13 +105,14 @@
 
 {% block popup %}
 <div class="popup" id="popup" style="display: none;">
-    <div class="close">
-        <button type="button" onclick="remove()">
-            <i class="fa fa-close"></i>
-        </button> 
-    </div>
     <div id="originID" style="visibility: hidden;"> </div>
     <div class="popup-content">
+        <div class="close">
+            <button class="close" type="button" onclick="remove()">
+                <i class="fa fa-close"></i>
+            </button> 
+        </div>
+        <h2>Post</h2>
         <div class="post">
             <p id="PrevPost">  </p>
         </div>
