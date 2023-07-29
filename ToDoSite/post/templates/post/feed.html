@@ -24,73 +24,92 @@ Your feed
             <h1 style="color: rgb(255, 255, 255);">Your Feed</h1>
         </div>
     </div>
-    {% for post in posts %}
-    <div class="box">
-        <div class="image">
-            <img src="{{ post.creator_profile_image }}" alt="Profile Image" width="50" height="50">
-        </div> 
-        <div class="place">
-            {% if post.referenced_post_pk %}
-                <a href="{% url 'comments' post_id=post.referenced_post_pk %}"> Replying to post </a><br/>
-            {% endif %}
-            <div class="name">
-                <a href="/explore/{{post.user.username}}">{{ post.user.username }}</a>
+    {% if posts %}
+        {% for post in posts %}
+        <div class="box">
+            <div class="image">
+                <img src="{{ post.creator_profile_image }}" alt="Profile Image" width="50" height="50">
             </div> 
-            <div class="time">
-                posted: {{ post.time|timesince }}
-            </div> <br>
-            <div class="con">
-                <div class="posCon">
-                    <p id="p{{post.id}}"> {{ post.text|safe }} </p>
-                </div>
-                <!--
-                {% if post.image %}
-                <div class="image-container">
-                <img src="/media/{{ post.image }}" alt="Profile Image" class="scaled-image">
-                </div>
+            <div class="place">
+                {% if post.referenced_post_pk %}
+                    <a href="{% url 'comments' post_id=post.referenced_post_pk %}"> Replying to post </a><br/>
                 {% endif %}
-                 -->
-                <div class="tag-container">
-                    <p> #{{ post.tag }} </p>
+                <div class="name">
+                    <a href="/explore/{{post.user.username}}">{{ post.user.username }}</a>
+                </div> 
+                <div class="time">
+                    posted: {{ post.time|timesince }}
+                </div> <br>
+                <div class="con">
+                    <div class="posCon">
+                        <p id="p{{post.id}}"> {{ post.text|safe }} </p>
+                    </div>
+                    <!--
+                    {% if post.image %}
+                    <div class="image-container">
+                    <img src="/media/{{ post.image }}" alt="Profile Image" class="scaled-image">
+                    </div>
+                    {% endif %}
+                    -->
+                    <div class="tag-container">
+                        <p> #{{ post.tag }} </p>
+                    </div>
                 </div>
-            </div>
-            <div class="options">
-                <div class="likes">
-                    <form method="POST" id="{{post.id}}" class="like-form" data-form-id="{{post.id}}">
-                        {% csrf_token %}
-                        <div class="press">
-                            {% if post.user_like %}
-                                <button style="color: red;" type="submit" name="is-liked" id="{{post.id}}like"> 
-                                    <i class="fa fa-heart"></i>
-                                </button> 
+                <div class="options">
+                    <div class="likes">
+                        <form method="POST" id="{{post.id}}" class="like-form" data-form-id="{{post.id}}">
+                            {% csrf_token %}
+                            <div class="press">
+                                {% if post.user_like %}
+                                    <button style="color: red;" type="submit" name="is-liked" id="{{post.id}}like"> 
+                                        <i class="fa fa-heart"></i>
+                                    </button> 
+                                {% else %}
+                                    <button style="color: rgb(255, 255, 255);" type="submit" name="is-liked" id="{{post.id}}like">  
+                                        <i class="fa fa-heart"></i>
+                                    </button> 
+                                {% endif %}
+                                <p id="like-count-{{post.id}}"> {{post.likes}} </p>
+                            </div>
+                        </form> 
+                    </div>
+                    <div class="comment">
+                        <button type="button" class="comment-button" data-post-id="{{ post.id }}">
+                            <i class="fa fa-comment"></i>
+                        </button> 
+                        <p id="co{{post.id}}"> 
+                            {% if post.comment_count == None %}
+                                0
                             {% else %}
-                                <button style="color: rgb(255, 255, 255);" type="submit" name="is-liked" id="{{post.id}}like">  
-                                    <i class="fa fa-heart"></i>
-                                </button> 
+                                {{post.comment_count}} 
                             {% endif %}
-                            <p id="like-count-{{post.id}}"> {{post.likes}} </p>
-                        </div>
-                    </form> 
-                </div>
-                <div class="comment">
-                    <button type="button" class="comment-button" data-post-id="{{ post.id }}">
-                        <i class="fa fa-comment"></i>
-                    </button> 
-                    <p id="co{{post.id}}"> 
-                        {% if post.comment_count == None %}
-                            0
-                        {% else %}
-                            {{post.comment_count}} 
-                        {% endif %}
-                    </p>
-                </div>
-                <div class="view">
-                    <a href="{% url 'comments' post_id=post.id %}" class="click"> view post </a>
+                        </p>
+                    </div>
+                    <div class="view">
+                        <a href="{% url 'comments' post_id=post.id %}" class="click"> view post </a>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-    {% endfor %}
+        {% endfor %}
+    {% else %}
+        <p>Since you currently follow no one, the feed is empty. Consider following these users by going to their profiles (click on the names) or search for users in the explore section.</p>
+        {% for u in top_users %}
+            <div class="person">
+                <div class="image">
+                    <img src="{{ u.p_image }}">
+                </div>
+                <div class="info">
+                    <div class="name">
+                        <a href="/explore/{{u.username}}">{{ u.username }}</a>
+                    </div>
+                    <div class="desc">
+                        <p>{{ u.p_desc }}</p>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    {% endif %}
 
 </div>
 {% endblock %}

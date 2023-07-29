@@ -3,6 +3,8 @@ from post.models import post, like
 from account.models import follower, Profile
 from django.db.models import Subquery, OuterRef, Exists, Count, F
 from post.forms import PostForm
+from django.contrib.auth.models import User
+from account.models import follower
 import os
 import uuid
 
@@ -68,6 +70,16 @@ class Post:
         posts = posts.annotate(referenced_post_pk=Subquery(referenced_posts.values('id')[:1]))
         return posts
 
+
+    @staticmethod
+    def getTopUsers(request):
+        users_with_most_followers = follower.objects.values('followee').annotate(num_followers=Count('followee')).order_by('-num_followers')[:5]
+        user_ids = [user['followee'] for user in users_with_most_followers]
+        top_users = User.objects.filter(id__in=user_ids)
+        profiles = Profile.objects.filter(user__in=user_ids)
+        top_users = top_users.annotate(p_image=Subquery(profiles.filter(user=OuterRef('id')).values('image')[:1]))
+        top_users = top_users.annotate(p_desc=Subquery(profiles.filter(user=OuterRef('id')).values('description')[:1]))
+        return render(request, 'post/feed.html', {"top_users": top_users})
 
 
     @staticmethod

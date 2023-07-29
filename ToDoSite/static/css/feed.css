@@ -152,4 +152,62 @@ button.disabled {
     max-height: 440px; 
     width: auto; 
     height: auto; 
-  }
+}
+
+.person {
+    display: flex;
+    align-items: center;
+    margin-right: 20px;
+    margin-bottom: 20px;
+    border-style: solid;
+    border-radius: 5px;
+    padding: 5px
+}
+
+.image img {
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+.info {
+    display: flex;
+    flex-direction: column;
+}
+
+.name a {
+    font-size: 18px;
+    font-weight: bold;
+    text-decoration: none;
+    color: white;
+    margin-bottom: 5px;
+}
+
+.desc p {
+    font-size: 16px;
+    color: white;
+    margin: 0;
+}
+
+.tags a{
+    color:white;
+}
+
+.tags {
+    text-align: center;
+}
+
+.t {
+    margin-bottom: 5px;
+}
+
+p {
+    color:white;
+}
+
+
+.info {
+    font-size: 12px;
+}

@@ -20,12 +20,14 @@ class verify:
     
     @staticmethod
     def register(request):
-        form = RegisterUser(request.POST)
-        if form.is_valid():
-            form.save()
-            username = form.cleaned_data["username"]
-            password = form.cleaned_data["password1"]
-            user = authenticate(request, username=username, password=password)
-            login(request, user)
-            #messages.success("request", str("Registration was successful"))
-            return redirect(request, '/post/feed', {})
+        if request.method == "POST":
+            form = RegisterUser(request.POST)
+            if form.is_valid():
+                form.save()
+                username = form.cleaned_data["username"]
+                password = form.cleaned_data["password1"]
+                user = authenticate(request, username=username, password=password)
+                login(request, user)
+                return redirect(request, '/post/feed/', {})
+        form = RegisterUser()    
+        return render(request, 'register/register.html', {"form": form})
