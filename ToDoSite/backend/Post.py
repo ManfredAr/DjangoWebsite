@@ -25,7 +25,7 @@ class Post:
                 newpost = post(user=request.user, text=text, tag=tag)
                 #newpost = post(user=request.user, text=text, tag=tag, image=image)
                 newpost.save()
-                return redirect('/home/')
+                return redirect('/post/feed')
         form = PostForm()
         return render(request, 'post/post.html', {'form':form})
     
