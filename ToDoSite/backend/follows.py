@@ -11,6 +11,11 @@ class follows:
 
     @staticmethod
     def following(request, username):
+        '''
+        For a given user it returns all the user who the first user is following.
+        '''
+
+        #Gets the profiles for all the users whoch the user follows.
         profile = User.objects.get(username=username)
         followers = follower.objects.filter(follower=profile)
         follower_users = [follower.followee for follower in followers]
@@ -20,6 +25,10 @@ class follows:
     
 
     def followers(request, username):
+        '''
+        For a given user it returns all the user who follow the first user.
+        '''
+        #Gets the profiles for all who follow the user.
         profile = User.objects.get(username=username)
         followers = follower.objects.filter(followee=profile)
         follower_users = [follower.follower for follower in followers]
