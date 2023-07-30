@@ -20,11 +20,12 @@
   <div class="container">
     <div class="shadow-lg p-3 mb-5 bg-white rounded" id="box" style="max-width: 60%;">
       <h2 style="left: 0;"> Register</h2>
-      <form action="" method="POST">
+      <form method="POST">
         {% csrf_token %}
         <div class="form-group">
           {{ form.as_p }}
         </div>
+        <a href="/login">Already have an account?</p>
         <button type="submit" class="btn btn-success">Register</button> <br>
       </form>
     </div>

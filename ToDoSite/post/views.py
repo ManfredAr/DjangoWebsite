@@ -10,6 +10,8 @@ def user_post(request):
 def feed(request):
     if request.user.is_authenticated:
         posts = Post.getFeed(request)
+        if len(posts) == 0:
+            return Post.getTopUsers(request);
         return render(request, 'post/feed.html', {"posts": posts})
     else: 
         return render(request, 'post/feed.html', {})

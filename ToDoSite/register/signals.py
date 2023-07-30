@@ -6,4 +6,4 @@ from django.contrib.auth.models import User
 @receiver(post_save, sender=User)
 def create_user_profile(sender, instance, created, **kwargs):
     if created:
-        Profile.objects.create(user=instance, image="account-images/default.jpg", description="")
+        Profile.objects.create(user=instance, image="/static/profile_images/default.jpg", description="")

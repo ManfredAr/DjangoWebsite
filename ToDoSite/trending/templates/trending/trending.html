@@ -18,19 +18,11 @@
     </div>
     <br/>
     <div class="main">
-        <form id="form" method="POST" onsubmit="return validateForm()">
+        <form method="POST" id="trendForm">
             {% csrf_token %}
-            <div class="searchbox">
-                <input id="query" name="search" placeholder="Search...">
-            </div>
-            <div class="button">
-                <button type="submit" id="submitButton">Search</button>
-            </div>
+                <button id="A" type="submit" name="choice" value="allTime" style="background-color: grey;"> All Time </button>
+                <button id="H" type="submit" name="choice" value="hour" style="background-color: white;"> Last hour </button>
         </form>
-    </div>
-
-    <div class="error" id="form-error" style="display: none;">
-        <p style="color: red;">Cannot be empty</p>
     </div>
 
     <br/>
