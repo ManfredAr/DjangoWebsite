@@ -88,11 +88,11 @@ CSRF_TRUSTED_ORIGINS = ['https://djangowebsite-production-d797.up.railway.app']
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'railway',
-        'USER': 'postgres',
+        'NAME': 'postgres',
+        'USER': 'postgres.nyficvsnghbkoimvelwu',
         'PASSWORD': config('DB_PASSWORD'),
-        'HOST': 'containers-us-west-113.railway.app',
-        'PORT': '7116',
+        'HOST': 'aws-0-eu-west-2.pooler.supabase.com',
+        'PORT': '5432',
     }
 }
 
