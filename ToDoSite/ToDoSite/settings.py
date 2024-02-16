@@ -24,7 +24,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = config('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['djangowebsite-production-d797.up.railway.app', '127.0.0.1']
 
@@ -79,7 +79,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'ToDoSite.wsgi.application'
 
-CSRF_TRUSTED_ORIGINS = ['https://djangowebsite-production-d797.up.railway.app']
+CSRF_TRUSTED_ORIGINS = ['*']
 
 
 # Database
@@ -88,11 +88,11 @@ CSRF_TRUSTED_ORIGINS = ['https://djangowebsite-production-d797.up.railway.app']
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'railway',
-        'USER': 'postgres',
+        'NAME': 'postgres',
+        'USER': 'postgres.nyficvsnghbkoimvelwu',
         'PASSWORD': config('DB_PASSWORD'),
-        'HOST': 'containers-us-west-113.railway.app',
-        'PORT': '7116',
+        'HOST': 'aws-0-eu-west-2.pooler.supabase.com',
+        'PORT': '5432',
     }
 }
 

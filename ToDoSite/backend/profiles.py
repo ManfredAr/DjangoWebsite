@@ -38,9 +38,11 @@ class profiles:
             #Retrieve the users original profile.
             profile = Profile.objects.get(user=request.user)
 
-            # Get the new image and description and update teh profile.
+            # Get the new image and description and update the profile.
+            print(request.POST)
             profile.image = request.POST.get("image_choice")
             profile.description = request.POST.get('desc')
+            
             profile.save()
             return redirect('/profile/')
         else:

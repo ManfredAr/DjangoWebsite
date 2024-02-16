@@ -33,6 +33,7 @@ class verify:
         if request.method == "POST":
             form = RegisterUser(request.POST)
             if form.is_valid():
+                print("yo?")
                 form.save()
                 # retrives the username and password and creates a new user.
                 username = form.cleaned_data["username"]
