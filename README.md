@@ -12,3 +12,4 @@ This is personal project for a social media network. This project is a clone of 
 
 ## Running instructions
 The application was build using python 3.8.5 so please make sure that is the version you are using. Next install the requirement files using this command pip install -r requirements. Finally run the application using py manage.py runserver .
+
